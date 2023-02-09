@@ -1,0 +1,829 @@
+/* .daimond{
+    background-image: url(image/Diamond\ 07.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+}
+.daimond:hover{
+    background-image: url(/image/hover\ pic.jpg);
+}
+.ruby{
+    background-image: url(/image/ruby\ stone.jfif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+}
+.ruby:hover{
+    background-image: url(/image/ruby\ hover.webp);
+}
+.quartz{
+    background-image: url(/image/QUARTZ\ STONE.jfif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+}
+.quartz:hover{
+    background-image: url(/image/quartz\ hover.jfif);
+}
+.emarld{
+    background-image: url(/image/EMARLD\ STONE.jfif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+}
+.emarld:hover{
+    background-image: url(/image/download.jfif);
+}
+.sapphire{
+    background-image: url(/image/sapphire.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+}
+.sapphire:hover{
+    background-image: url(/image/sapphire\ hiverrr.jpg);
+} */
+.story{
+    background-image: url(/image/Diamond+Buying+Guide.jfif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    width:50% ;
+}
+.girl1{
+    background-image: url(/image/microsoft-365-7mBictB_urk-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:400px;
+    width: 285px;
+  }
+  .girl1:hover{
+    transform: translate(-7px);
+    transition: 0.5s linear;
+
+  }
+  
+  .boy{
+    background-image: url(/image/meysam-jarahkar-LI7jB1925j0-unsplash.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height:400px;
+    width: 285px;
+  }
+  .boy:hover{
+    transform: translate(-5px);
+    transition: 0.4s linear;
+
+  }
+  .girl2{
+    background-image: url(/image/christina-wocintechchat-com-SJvDxw0azqw-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:400px;
+    width: 285px;
+  }
+  .girl2:hover{
+    transform: translate(-7px);
+    transition: 0.5s linear;
+
+  }
+ 
+
+    
+    .newsletter .content {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2; }
+    .newsletter .content h2 {
+    color: #ffffff;
+    margin-bottom: 40px;
+     }
+    .newsletter .content .form-control {
+    height: 50px;
+    border-color: #ffffff;
+    border-radius:0;
+    }
+    .newsletter .content.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #945e18e6;
+    }
+    .newsletter .content .btn {
+    min-height: 50px; 
+    border-radius:0;
+    background: #945e18e6;
+    color: #fff;
+    font-weight:600;
+    }
+   
+   
+    
+        .searchbar{
+        margin-bottom: auto;
+        margin-top: auto;
+        height: 60px;
+        background-color: #353b48;
+        border-radius: 30px;
+        padding: 10px;
+        }
+    
+        .search_input{
+        color: white;
+        border: 0;
+        outline: 0;
+        background: none;
+        width: 0;
+        caret-color:transparent;
+        line-height: 40px;
+        transition: width 0.4s linear;
+        }
+    
+        .searchbar:hover > .search_input{
+        padding: 0 10px;
+        width: 450px;
+        caret-color:red;
+        transition: width 0.4s linear;
+        }
+    
+        .searchbar:hover > .search_icon{
+        background: white;
+        color: #e74c3c;
+        }
+    
+        .search_icon{
+        height: 40px;
+        width: 40px;
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color:white;
+        text-decoration:none;
+        }   
+        h1{
+            text-shadow: 2px 2px 5px grey;
+        }
+        @media (min-width: 768px) {
+
+            /* show 3 items */
+            .carouselPrograms .carousel-inner .active,
+            .carouselPrograms .carousel-inner .active + .carousel-item,
+            .carouselPrograms .carousel-inner .active + .carousel-item + .carousel-item {
+                display: block;
+            }
+        
+            .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+            .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+            .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+                transition: none;
+            }
+        
+            .carouselPrograms .carousel-inner .carousel-item-next,
+            .carouselPrograms .carousel-inner .carousel-item-prev {
+                position: relative;
+                transform: translate3d(0, 0, 0);
+            }
+        
+            .carouselPrograms .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+                position: absolute;
+                top: 0;
+                right: -33.333%;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+        
+            /* left or forward direction */
+            .carouselPrograms .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+            .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item,
+            .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+            .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+        
+            /* farthest right hidden item must be abso position for animations */
+            .carouselPrograms .carousel-inner .carousel-item-prev.carousel-item-right {
+                position: absolute;
+                top: 0;
+                left: 0%;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+        
+            /* right or prev direction */
+            .carouselPrograms .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+            .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item,
+            .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+            .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+
+
+        /* .j1{
+            background-image:url(/image/j1.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 200px;
+            width: 100%;
+        }
+        .j2{
+            background-image:url(/image/j22.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 200px;
+            width: 100%;
+
+        }
+        .j3{
+            background-image:url(/image/j3.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 200px;
+            width: 100%;
+
+
+        }
+        .j4{
+            background-image:url(/image/j44.webp) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 200px;
+            width: 100%;
+
+        }
+        .j6{
+            background-image:url(/image/j6.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+        }
+        .j7{
+            background-image:url(/image/j774.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .j8{
+            background-image:url(/image/j88.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+
+        }
+        .j9{
+            background-image:url(/image/j99.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .e1{
+            background-image:url(/image/e1.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+        }
+        .e2{
+            background-image:url(/image/e2.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .e3{
+            background-image:url(/image/ee33.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+
+        }
+        .e4{
+            background-image:url(/image/e4.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .e6{
+            background-image:url(/image/e6.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+        }
+        .e7{
+            background-image:url(/image/e77.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .e8{
+            background-image:url(/image/e8.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+
+        }
+        .e9{
+            background-image:url(/image/e9.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .s1{
+            background-image:url(/image/e77.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width: 400px;
+
+        }
+        .s2{
+            background-image:url(/image/e8.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:400px;
+
+
+        }
+        .s3{
+            background-image:url(/image/e9.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:400px ;
+
+        } */
+        .COL1{ background-image:url(/image/COL\ 1.webp) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:100% ;
+
+        }
+        .COL1:hover{
+            background-image: url(/imagE/COL1\ HOVER.webp);
+        }
+        .COL2{ background-image:url(/image/COL\ 2\ PEND.webp) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:100% ;
+
+        }
+        .COL2:hover{
+            background-image: url(/imagE/HOVER\ COL\ 2\ PEND.webp);
+        }
+        .COL3{ background-image:url(/image/col\ 3\ brac.webp) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:100% ;
+
+        }
+        .COL3:hover{
+            background-image: url(/image/col\ 3\ hover\ brace.webp);
+        }
+        .COL4{ background-image:url(/image/col4\ ring.jpeg) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:100% ;
+
+        }
+        .COL4:hover{
+            background-image: url(/imagE/col\ 4\ ring\ hover.jpeg);
+        }
+        .COL5{ background-image:url(/image/col\ 5\ nec.jpeg) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:100% ;
+
+        }
+        .COL5:hover{
+            background-image: url(/image/col\ 3\ hover\ brace.webp);
+        }
+        .COL6{ background-image:url(/image/col\ 6.jpeg) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            width:100% ;
+
+        }
+        .COL6:hover{
+            background-image: url(/imagE/col\ 6\ ring.jpeg);
+        }
+        /* .r1{
+            background-image:url(/image/cr1.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+        }
+        .r2{
+            background-image:url(/image/rubyrings123.webp) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .r3{
+            background-image:url(/image/cr3.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+
+        }
+        .r4{
+            background-image:url(/image/cr4.jpg) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .r5{
+            background-image:url(/image/cr5.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .r6{
+            background-image:url(/image/cr6.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .q1{
+            background-image:url(/image/cr1.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+        }
+        .q2{
+            background-image:url(/image/cr2.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .q3{
+            background-image:url(/image/cr3.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+
+        }
+        .q4{
+            background-image:url(/image/cr4.jpg) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .q5{
+            background-image:url(/image/cr5.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .q6{
+            background-image:url(/image/cr6.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .sp1{
+            background-image:url(/image/cr1.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+        }
+        .sp2{
+            background-image:url(/image/cr2.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .sp3{
+            background-image:url(/image/cr3.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+
+        }
+        .sp4{
+            background-image:url(/image/cr4.jpg) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+
+        .sp5{
+            background-image:url(/image/cr5.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        }
+        .sp6{
+            background-image:url(/image/cr6.jfif) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+
+        } */
+        .space {
+            margin-right: 20px;
+        }
+
+        .left-space {
+            margin-left: 170px;
+        }
+
+
+        #min {
+            margin-left: 100px;
+        }
+
+
+.sale{  background: linear-gradient(to left, rgb(185, 179, 179) , #945e18e6);}
+
+
+
+        .nn{
+            background: linear-gradient(to left, rgb(29, 27, 27) , #945e18e6);
+        }
+        /* cards adavance */
+        .product-grid6,
+        .product-grid6 .product-image6 {
+            overflow: hidden
+        }
+
+        .product-grid6 {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            position: relative;
+            transition: all .5s ease 0s
+        }
+
+        .product-grid6:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3)
+        }
+
+        .product-grid6 .product-image6 a {
+            display: block
+        }
+
+        .product-grid6 .product-image6 img {
+            width: 100%;
+            height: auto;
+            transition: all .5s ease 0s
+        }
+
+        .product-grid6:hover .product-image6 img {
+            transform: scale(1.1)
+        }
+
+        .product-grid6 .product-content {
+            padding: 12px 12px 15px;
+            transition: all .5s ease 0s
+        }
+
+        .product-grid6:hover .product-content {
+            opacity: 0
+        }
+
+        .product-grid6 .title {
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: capitalize;
+            margin: 0 0 10px;
+            transition: all .3s ease 0s
+        }
+
+        .product-grid6 .title a {
+            color: #000
+        }
+
+        .product-grid6 .title a:hover {
+            color: #2e86de
+        }
+
+        .product-grid6 .price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2e86de
+        }
+
+        .product-grid6 .price span {
+            color: #999;
+            font-size: 15px;
+            font-weight: 400;
+            text-decoration: line-through;
+            margin-left: 7px;
+            display: inline-block
+        }
+
+        .product-grid6 .social {
+            background-color: #fff;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            opacity: 0;
+            transform: translateX(-50%);
+            position: absolute;
+            bottom: -50%;
+            left: 50%;
+            z-index: 1;
+            transition: all .5s ease 0s
+        }
+
+        .product-grid6:hover .social {
+            opacity: 1;
+            bottom: 20px
+        }
+
+        .product-grid6 .social li {
+            display: inline-block
+        }
+
+        .product-grid6 .social li a {
+            color: #909090;
+            font-size: 16px;
+            line-height: 45px;
+            text-align: center;
+            height: 45px;
+            width: 45px;
+            margin: 0 7px;
+            border: 1px solid #909090;
+            border-radius: 50px;
+            display: block;
+            position: relative;
+            transition: all .3s ease-in-out
+        }
+
+        .product-grid6 .social li a:hover {
+            color: #fff;
+            background-color: #2e86de;
+            width: 80px
+        }
+
+        .product-grid6 .social li a:after,
+        .product-grid6 .social li a:before {
+            content: attr(data-tip);
+            color: #fff;
+            background-color: #2e86de;
+            font-size: 12px;
+            letter-spacing: 1px;
+            line-height: 20px;
+            padding: 1px 5px;
+            border-radius: 5px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-50%);
+            position: absolute;
+            left: 50%;
+            top: -30px
+        }
+
+        .product-grid6 .social li a:after {
+            content: '';
+            height: 15px;
+            width: 15px;
+            border-radius: 0;
+            transform: translateX(-50%) rotate(45deg);
+            top: -20px;
+            z-index: -1
+        }
+
+        .product-grid6 .social li a:hover:after,
+        .product-grid6 .social li a:hover:before {
+            opacity: 1
+        }
+
+        @media only screen and (max-width:990px) {
+            .product-grid6 {
+                margin-bottom: 30px
+            }
+        }
+       
+         .icon{
+            font-size:27px;
+        color:black;
+         }
+         .icons{
+            font-size:27px;
+            color: black;
+         }
+         .lo{
+             color:black;
+         }
+         li :hover{
+         background-color: rgb(231, 222, 222);
+          }
+         #preloader{
+        background: white url(./image/Sameer.gif) no-repeat center center;
+        background-size: 15%;
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        z-index: 900;
+        opacity: 1;
+        
+        
+      } 
+
+      /* #preloader{
+        position: fixed;
+        
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        background: url(./image/Sameer.gif);
+        opacity: 1;
+        background-repeat: no-repeat;
+      } */
+    
+
+
+      ::-webkit-scrollbar{
+        width: 15px !important;
+      }
+
+      ::-webkit-scrollbar-track{
+        box-shadow: inset 0 0 5px gray;
+      }
+
+      ::-webkit-scrollbar-thumb{
+        background-color: #945e18e6;
+        border-radius: 10px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover{
+        background-color: #945e18e6 !important;
+      }
+
+      .navbar-toggler:focus{
+        outline: none !important;
+      }

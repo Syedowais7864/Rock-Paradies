@@ -1,0 +1,1 @@
+var kp_rule_publisher_ids = []; var kp_rule_response = false; var kp_product_id_valid = true; var kp_uuid = "0"; 

@@ -1,0 +1,115 @@
+(function(w) {
+	if( typeof w.KPMasterTagConsent === "undefined" || w.KPMasterTagConsent.kp_type === "config" ) {
+		w.KPMasterTagConsent = {
+			kp_type : "config",
+			constants : {
+			},
+			global : {
+				call_source_params_default : "cm",
+				call_source_default : "mt",
+				cookie_lifetime : 60 * 60 * 24 * 365,
+				cookie_advertiser_specific : true,
+				cookie_advertiser_unspecific_key : "opt_global",
+				cookie_advertiser_global_key : "global_opt",
+				cookie_log_last_opt : false,
+				cookie_log_gdpr_params : false,
+				cookie_max_buffer : 5,
+				cookie_max_length : 7000,
+				cookie_max_length_min_count : 10,
+				pixel_timeout : 1000,
+				module_consent_active : true,
+				iab_vendor_id : 424,
+				iab_purpose_ids : [4, 7],
+				iab_leg_int_purpose_ids : [],
+				iab_vendor_partners : [[21, "Tradedesk"], [34, "Neory"], [39, "Adition"], [140, "Platform161"]]
+			},
+			thirdParty : {
+				optin : [
+					// Affili.Net
+					{
+						"id":"F59A10D0",
+						"type":"url",
+						"url":"https://consent.webmasterplan.com/v2/optin",
+						"content":""
+					},
+					// Platform161
+					{
+						"id":"2416F6E2",
+						"type":"url",
+						"url":"https://ads.creative-serving.com/opt-in",
+						"content":""
+					},
+					// Neory
+					{
+						"id":"A72C8B83",
+						"type":"url",
+						"url":"https://ad.ad-srv.net/privacy/pwzdy6wsn8n7/vr2yp9axoi7w/setOptIn",
+						"content":""
+					}
+				],
+				optout : [
+					// Kupona Demarker Script
+					{
+						"id":"B0D0BD22",
+						"type":"url",
+						"url":"https://retrack-kupona.kuponacdn.de/demarker/de.html?site=all",
+						"content":""
+					},
+					// Affili.Net
+					{
+						"id":"F59A10D0",
+						"type":"url",
+						"url":"https://consent.webmasterplan.com/v2/optout",
+						"content":""
+					},
+					// Platform161
+					{
+						"id":"2416F6E2",
+						"type":"url",
+						"url":"https://ads.creative-serving.com/opt-out",
+						"content":""
+					},
+					// Neory
+					{
+						"id":"A72C8B83",
+						"type":"url",
+						"url":"https://ad.ad-srv.net/privacy/pwzdy6wsn8n7/vr2yp9axoi7w/setOptOut",
+						"content":""
+					},
+					// Tradedesk
+					{
+						"id":"9c721c90",
+						"type":"url",
+						"url":"https://insight.adsrvr.org/track/stop?action=dooptout",
+						"content":""
+					}
+				],
+				iab : [
+				]
+			},
+			additionals : {
+				customers : {
+					config : ['27374', '9558', '9599', '12955', '24361', '27277', '21370', '30512', '9406', '12641', '11139', '24971', '10580', '28555', '30748', '17656', '40112', '9714', '41206', '30136', '30785', '19719', '13134', '11309', '30353', '44490', '24457', '13147', '26954', '10821', '26763', '10578', '11132', '21157', '18540', '43594', '27307', '29986', '30524', '21385', '42576', '30886', '31025', '10706', '12410', '31238', '12956', '9054', '27410', '43268', '25038', '26363', '17627', '19867', '31412', '27697', '30855', '27052', '25667', '24901', '30896', '30448', '22368', '11415', '27994', '40024', '25443', '24275', '21187', '21343', '43266', '43114', '30257', '26176', '28025', '41518', '30024', '27375', '27375', '13203', '25458', '26130', '25288', '26126', '43376', '30645', '30522', '19718', '43116', '30849', '30927', '25293', '22405', '43126', '27012', '29052', '12519', '24577']
+				}
+			},
+			customers : {
+				'default' : {
+					advertiser_decision_default : "out",
+					user_decision_default : null
+				},
+				21370 : {
+					advertiser_decision_default : "out",
+					user_decision_default : null
+				},
+				30106 : {
+					advertiser_decision_default : "out",
+					user_decision_default : null
+				},
+				44628 : {
+					advertiser_decision_default : "out",
+					user_decision_default : null
+				}
+			}
+		}
+	}
+}(window));

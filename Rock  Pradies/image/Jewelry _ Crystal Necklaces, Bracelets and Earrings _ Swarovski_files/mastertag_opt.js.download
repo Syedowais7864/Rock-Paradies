@@ -1,0 +1,150 @@
+/**
+ * Wird von Mastertag benötigt
+ * -> Remote Funktionen für Kommunikation zwischen opt.js und opt.html implementieren
+ * -> Javascript Variablen für Mastertag zur Verfügung stellen
+ * -> Mastertag muss auf Variablen prüfen und darf erst danach aktiv werden
+ */
+(function(w) {
+	var d = w.document;
+	
+	var url = "https://opt.kuponacdn.de/mastertag_opt.html?";
+	var url_params = [];
+	if(typeof v!="undefined") url_params.push("v="+encodeURIComponent(v));
+	else if(typeof document.currentScript!="undefined" && document.currentScript.getAttribute("data-opt-version")) url_params.push("v="+encodeURIComponent(document.currentScript.getAttribute("data-opt-version")));
+	else if(document.getElementById('kp_mtc')!==null && document.getElementById('kp_mtc').getAttribute("data-opt-version")) url_params.push("v="+encodeURIComponent(document.getElementById('kp_mtc').getAttribute("data-opt-version")));
+	if(typeof kp_customer_id!="undefined") url_params.push("kp_customer_id="+encodeURIComponent(kp_customer_id));
+	else if(typeof document.currentScript!="undefined") url_params.push("kp_customer_id="+encodeURIComponent(document.currentScript.getAttribute("data-customer-id")));
+	else if(document.getElementById('kp_mtc')!==null) url_params.push("kp_customer_id="+encodeURIComponent(document.getElementById('kp_mtc').getAttribute("data-customer-id")));
+	if(typeof kp_user_opt!="undefined") url_params.push("kp_user_opt="+encodeURIComponent(kp_user_opt));
+	if(typeof kp_customer_opt!="undefined") url_params.push("kp_customer_opt="+encodeURIComponent(kp_customer_opt));
+	if(typeof d.referrer!="undefined" && d.referrer!="") url_params.push("kp_ref="+encodeURIComponent(d.referrer));
+	else if(typeof kp_ref!="undefined" && kp_ref!="") url_params.push("kp_ref="+encodeURIComponent(kp_ref));
+	if(typeof kp_gdpr!="undefined") url_params.push("gdpr="+encodeURIComponent(kp_gdpr));
+	if(typeof kp_gdpr_consent!="undefined") url_params.push("gdpr_consent="+encodeURIComponent(kp_gdpr_consent));
+	if(typeof kp_gdpr_pd!="undefined") url_params.push("gdpr_pd="+encodeURIComponent(kp_gdpr_pd));
+	if(typeof kp_call_source!="undefined") url_params.push("kp_call_source="+encodeURIComponent(kp_call_source));
+	if(url_params.length>0) url+=url_params.join("&");
+	
+	var kp_rtrgt_random = Math.random() * 10000000000000000;
+	
+	var iframe = document.createElement('iframe');
+	iframe.id = 'kp_' + kp_rtrgt_random;
+	iframe.allowtransparency = 'true';
+	iframe.framespacing = '0';
+	iframe.frameborder = '0';
+	iframe.scrolling = 'no';
+	iframe.width = '0';
+	iframe.height = '0';
+	
+	if(url) {
+		iframe.src = url;
+	} else {
+		if('srcdoc' in iframe) {
+			iframe.srcdoc = content;
+		} else {
+			content = content.replace(/"/g, '\\"');
+			var u = 'javascript:(function(){document.open();document.domain="' + document.domain + '";document.write("' + content + '");document.close();})();';
+			iframe.src = u;
+		}
+	}
+	
+	if(!document.body){
+		document.firstChild.appendChild(document.createElement('body'));
+	}
+	
+	if(document.getElementById('kp_rtrgt_opt_div_' + kp_rtrgt_random)===null) {
+		var hiddenDiv = document.createElement('div');
+		hiddenDiv.id = 'kp_rtrgt_opt_div_' + kp_rtrgt_random;
+		hiddenDiv.innerHTML = '';
+		hiddenDiv.style.visibility = 'hidden';
+		hiddenDiv.style.display = 'none';
+		hiddenDiv.style.position = 'absolute';
+		hiddenDiv.style.left = '0px';
+		hiddenDiv.style.top = '0px';
+		hiddenDiv.style.width = '1px';
+		hiddenDiv.style.height = '1px';
+		hiddenDiv.style.border = '0';
+		
+		document.body.appendChild(hiddenDiv);
+	}
+	
+	document.getElementById('kp_rtrgt_opt_div_' + kp_rtrgt_random).appendChild(iframe);
+}(window));
+
+
+function KPConsentRemote(autoInit) {
+	
+	var valid_origin   = "https://opt.kuponacdn.de";
+	var remote_return = 0;
+	
+	var init_run = false;
+	
+	this.init = function() {
+		if(!this.getInitRun()) {
+			if(window.attachEvent) window.attachEvent("onmessage", this.onmessage);
+			if(document.attachEvent) document.attachEvent("onmessage", this.onmessage);
+			if(window.addEventListener ) window.addEventListener ("message", this.onmessage);
+			this.setInitRun(true);
+		}
+	}
+	
+	this.getInitRun = function() {
+		return init_run;
+	}
+	
+	this.setInitRun = function(run) {
+		init_run = run;
+		return this;
+	}
+	
+	this.onmessage = function(e){
+		if(typeof e=="undefined") e = window.event;
+		
+		if ( e.origin !== valid_origin ) {
+			return;
+		}
+	
+		try {
+			if(e.data.indexOf("origin")!=-1) {
+				var data = JSON.parse(e.data);
+				
+				if(typeof data.auth!="undefined" && typeof data.authSource!="undefined") {
+					if(data.authSource=="KPCRP") {
+						remote_authenticated =  true;
+						e.source.postMessage('{"origin":"'+window.location.host+'","auth":"'+data.auth.split("").reverse().join("")+'","authSource":"KPConsentRemote"}', e.origin);
+					}
+					return;
+				} else
+				if(!remote_authenticated && typeof data.authCheck!="undefined" && data.authCheck==true) {
+					return;
+				}
+				
+				remote_return = 1;
+				if(typeof data.method!=="undefined" && typeof data.messageSource!="undefined") {
+					if(data.messageSource=="KPCRP") {
+						var methods = data.method.split(",");
+						for(idx in methods) {
+							switch(methods[idx]) {
+								case "setParams":
+									if(typeof data.params!=="undefined") setParams(data.params);
+									break;
+							}
+						}
+					}
+				}
+			}
+		} catch(e) {}
+	}
+	
+	function setParams(params) {
+		for(var prop in params) {
+			if(!params.hasOwnProperty(prop)) continue;
+			
+			window[ prop ] = params[ prop ];
+		}
+	}
+	
+	if(typeof autoInit=="undefined" || autoInit==true) this.init();
+}
+var KPConsentRemote = new KPConsentRemote(false);
+KPConsentRemote.init();

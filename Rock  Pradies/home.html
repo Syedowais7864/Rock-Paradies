@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page </title>
+    <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.css">
+    <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+.footer{
+    background: linear-gradient((to left)rgb(0, 0, 0),(#a07b4b));
+}
+
+
+
+
+
+
+
+
+        .space {
+            margin-right: 70px;
+        }
+
+        .left-space {
+            margin-left: 70px;
+        }
+
+
+        #min {
+            margin-left: 100px;
+        }
+
+        .demo {
+            padding: 45px 0
+        }
+
+        .product-grid2 {
+            font-family: 'Open Sans', sans-serif;
+            position: relative
+        }
+
+        .product-grid2 .product-image2 {
+            overflow: hidden;
+            position: relative
+        }
+
+        .product-grid2 .product-image2 a {
+            display: block
+        }
+
+        .product-grid2 .product-image2 img {
+            width: 100%;
+            height: auto
+        }
+
+        .product-image2 .pic-1 {
+            opacity: 1;
+            transition: all .5s
+        }
+
+        .product-grid2:hover .product-image2 .pic-1 {
+            opacity: 0
+        }
+
+        .product-image2 .pic-2 {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all .5s
+        }
+
+        .product-grid2:hover .product-image2 .pic-2 {
+            opacity: 1
+        }
+
+        .product-grid2 .social {
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            bottom: 50px;
+            right: 25px;
+            z-index: 1
+        }
+
+        .product-grid2 .social li {
+            margin: 0 0 10px;
+            display: block;
+            transform: translateX(100px);
+            transition: all .5s
+        }
+
+        .product-grid2:hover .social li {
+            transform: translateX(0)
+        }
+
+        .product-grid2:hover .social li:nth-child(2) {
+            transition-delay: .15s
+        }
+
+        .product-grid2:hover .social li:nth-child(3) {
+            transition-delay: .25s
+        }
+
+        .product-grid2 .social li a {
+            color: #505050;
+            background-color: #fff;
+            font-size: 17px;
+            line-height: 45px;
+            text-align: center;
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            display: block;
+            transition: all .3s ease 0s
+        }
+
+        .product-grid2 .social li a:hover {
+            color: #fff;
+            background-color: #3498db;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .5)
+        }
+
+        .product-grid2 .social li a:after,
+        .product-grid2 .social li a:before {
+            content: attr(data-tip);
+            color: #fff;
+            background-color: #000;
+            font-size: 12px;
+            line-height: 22px;
+            border-radius: 3px;
+            padding: 0 5px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-50%);
+            position: absolute;
+            left: 50%;
+            top: -30px
+        }
+
+        .product-grid2 .social li a:after {
+            content: '';
+            height: 15px;
+            width: 15px;
+            border-radius: 0;
+            transform: translateX(-50%) rotate(45deg);
+            top: -22px;
+            z-index: -1
+        }
+
+        .product-grid2 .social li a:hover:after,
+        .product-grid2 .social li a:hover:before {
+            opacity: 1
+        }
+
+       .product-grid2 .add-to-cart {
+            color: #fff;
+            background-color: #404040;
+            font-size: 15px;
+            text-align: center;
+            width: 100%;
+            padding: 10px 0;
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: -100%;
+            transition: all .3s
+        } 
+
+        .product-grid2 .add-to-cart:hover {
+            background-color: #3498db;
+            text-decoration: none
+        }
+
+        .product-grid2:hover .add-to-cart {
+            bottom: 0
+        }
+
+        .product-grid2 .product-new-label {
+            background-color: #3498db;
+            color: #fff;
+            font-size: 17px;
+            padding: 5px 10px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: all .3s
+        }
+
+        .product-grid2:hover .product-new-label {
+            opacity: 0
+        }
+
+        .product-grid2 .product-content {
+            padding: 20px 10px;
+            text-align: center
+        }
+
+        .product-grid2 .title {
+            font-size: 17px;
+            margin: 0 0 7px
+        }
+
+        .product-grid2 .title a {
+            color: #303030
+        }
+
+        .product-grid2 .title a:hover {
+            color: #3498db
+        }
+
+        .product-grid2 .price {
+            color: #303030;
+            font-size: 15px
+        }
+
+        @media screen and (max-width:990px) {
+            .product-grid2 {
+                margin-bottom: 30px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid  " style="background-color:#99774b;">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1"><h6 class="text-white">Cash Delivery</h6></div>
+<div class="col-lg-1 col-md-1 col-sm-1"><h6 class="text-white"> Free Delivery</h6></div>
+<div class="col-lg-1 col-md-1 col-sm-1 "><h6 class="text-white"><a> Cash Back </a></h6></div>
+<div class="col-lg-9 col-md-9 col-sm-9"></div>
+            </div>
+
+        </div>
+          <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 pt-2">Syedowais786@gmail.com</div>
+            <div class="col-lg-6 col-md-6 col-sm-6 " >
+                 <div class="" style="margin-left: 65%;"> <button class=" btn btn-secondary text-white "
+                     data-bs-toggle="modal"
+                    data-bs-target="#modal2">select</button>
+                <button class="ms-3 btn-secondary text-white p-2" data-bs-toggle="modal"
+                    data-bs-target="#modal11">LOGIN</button>
+                <button class="ms-3 btn-secondary text-white p-2" 
+                data-bs-toggle="offcanvas"
+                    data-bs-target="#demo">cart</button> 
+            </div>
+        </div>
+    </div> <br> --> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                </div>
+                 <div class="col-lg-4 col-md-4 col-sm-4"><img src="/image/WEBSITE LOGO.PNG" style="width: 400px; margin-left:10%;"  alt=""></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"></div>
+
+            </div>
+
+        </div>
+        <div class="container">
+
+            <div class=" text-center mt-4">
+                <form class="d-flex">
+                    <input class="form-control mx-auto mb-5" style=" width: 600px; height: 50px; border-radius: 35px; " type="search"
+                        placeholder="Search" aria-label="Search">
+
+                </form>
+            </div>
+
+        </div>
+
+
+    </header>
+
+    <nav class="navbar navbar-expand-lg    text-center">
+        <div class="container">
+            <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#carnav">
+                <span class="navbar-toggler-icon ">
+                    <i class="fa-sharp fa-solid fa-circle-chevron-down" style="font-size: 35px;"></i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="carnav">
+                <ul class="navbar-nav ">
+                    <li class="nav-item space left-space">
+                        <a class="nav-link text-dark" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">HOME</a>
+
+                    </li>
+
+
+                    <li class="nav-item  dropdown space ">
+                        <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">CATEGORIES</a>
+                        <ul class="dropdown-menu nav-item-center">
+                            <li class="dropdown-item"> <a href="/Daimond.html">Diamond</a></li>
+                            <li class="dropdown-item" href="/Quartz.html">Quartz</li>
+                            <li class="dropdown-item" href="/Ruby.html">Ruby</li>
+                            <li class="dropdown-item" href="/Sapphire.html">Sapphire</li>
+                            <li class="dropdown-item" href="/emearldss.html">Emerald</li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item  dropdown space ">
+                        <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">BRANDS</a>
+                        <ul class="dropdown-menu nav-item-center">
+                            <li class="dropdown-item"> <a href="/Daimond.html">Swarovski</a></li>
+                            <li class="dropdown-item" href="/Quartz.html">Tiffany</li>
+                            <li class="dropdown-item" href="/Ruby.html">Pandora</li>
+
+                        </ul>
+
+                    </li>
+                    <li class="nav-item space ">
+                        <a class="nav-link text-dark" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">TOP SELLING ITEM</a>
+
+                    </li>
+                    <!-- <li class="nav-item space">
+                        <a class="nav-link text-dark" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">GALLERY</a>
+
+                    </li> -->
+                    <li class="nav-item space ">
+                        <a class="nav-link text-dark" href="/"
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">NEW IN</a>
+                    </li>
+                    <li class="nav-item space ">
+                        <a class="nav-link text-dark" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">ABOUT US</a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a class="nav-link text-dark" href=""
+                            style="font-family: Georgia, 'Times New Roman', Times, serif;">CONTACT US</a>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="modal" id="modal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">ROCK PARADISE</h4>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mx-auto">
+
+
+
+                    <h3>SELECT YOUR COUNTRY NAME</h3> <br><br>
+                    <select style="width: 100%; height:50px;">
+                        <Label for="COUNTRY">COUNTRY</Label>
+                        <option value="1">SELECT YOUR COUNTRY NAME</option>
+                        <option value="1">pakistan</option>
+                        <option value="2">INDIA</option>
+                        <option value="3">afghanistan</option>
+                        <option value="4">TURKEY</option>
+                        <option value="5">AMERICA</option>
+                        <option value="6">CANADA</option>
+                        <option value="1">USA</option>
+                        <option value="1">IRAN</option>
+                        <option value="1">DUBAI</option>
+                        <option value="1">SAUDIA</option>
+                        <option value="1">BANGLADESH</option>
+                        <option value="1">AUSTRAILIA</option>
+                        <option value="1">SIRILANKA</option>
+                        <option value="1">ENGLAND</option>
+                        <option value="1">CHINA</option>
+                    </select><br> <br><br>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-lg mx-auto ">SAVE</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal" id="modal11">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">ROCK PARADISE</h4>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h1 class="text-center">HELLO</h1><br>
+                    <DIV class="mx-auto"> <button class="btn btn-dark  text-center "
+                            style="width: 30%; margin-left: 17%;">SIGN IN</button>
+                        <BUTTON class="btn btn-dark me-5">CREATE ACCOUNT</BUTTON>
+                    </DIV><br> <br> <br>
+                    <ul class="me-5">
+                        <li>Acoount information</li>
+                        <li>Address</li>
+                        <li>Orders</li>
+                    </ul>
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="offcanvas offcanvas-end" id="demo">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">SHOPPING CART<h1>
+                    <H5>0 items</H5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"> </button>
+        </div>
+        <div class="offcanvas-body">
+
+        </div>
+    </div>
+
+
+
+  
+    <div class="container ">
+        <div class="col-sm-12 col-md-12 col-lg-12 mx-0">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/Carusel Banner/banner 2.png" class="d-block " height="600px" width="100%" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/Carusel Banner/shipphire banner.jpg" class="d-block " height="600px" width="100%"
+                            alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/Carusel Banner/TIFANNY 3.png" class="d-block " height="600px" width="100%" alt="...">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="/image/jewellery_1600x.webp" class="d-block " height="600px" width="100%" alt="...">
+                    </div>
+
+
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="container-fluid">
+        <h3 style="font-family: cursive;" class="text-center"> <b> BEST COLLECTION FOR YOU</b></h3>
+       
+        <hr style="color: black; margin: auto;height: 5px;margin-bottom:20px ;width: 100px;;">
+
+    </div><br> <br>
+    <div class="container">
+        <div class="row">
+           
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-4">
+
+                <div class="card COL1" style="width: 25rem; ">
+                    
+                        
+                    <!-- <div class="card-body text-center">
+                        <h5 class="card-title"><Strong style="font-family: 'Courier New', Courier, monospace;">CHARCOAL</Strong></h5>
+                        <p class="card-text text-dark"> <strong> Rs.1299</strong></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-4">
+
+                <div class="card COL2" style="width: 25rem; text-align: center; ">
+                   
+                        
+                    <!-- <div class="card-body">
+                        <h5 class="card-title "><Strong style="font-family: 'Courier New', Courier, monospace;">DE-TAN</Strong></h5>
+                        <p class="card-text text-dark"> <strong>Rs.1699</strong></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-4">
+
+                <div class="card COL3" style="width: 25rem; text-align: center; ">
+                   
+                    <!-- <div class="card-body">
+                        <h5 class="card-title "><Strong style="font-family: 'Courier New', Courier, monospace;">Beard Grooming</Strong></h5>
+                        <p class="card-text text-dark"><strong>Rs.1799</strong> </p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div> -->
+                </div>
+            </div>
+
+           
+
+            <div class="col-sm-6 col-md-4 col-lg-4" style="margin-top: 3%;">
+
+                <div class="card COL4" style="width: 25rem; text-align: center;">
+                   
+                    <!-- <div class="card-body">
+                        <h5 class="card-title "><Strong style="font-family: 'Courier New', Courier, monospace;">Growth Line</Strong></h5>
+                        <p class="card-text text-dark"> <strong>Rs.2199</strong></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div> -->
+                </div>
+            </div>
+           
+            <div class="col-sm-6 col-md-4 col-lg-4" style="margin-top: 3%;">
+
+                <div class="card COL5" style="width: 25rem; text-align: center;">
+                  
+                    <!-- <div class="card-body">
+                        <h5 class="card-title "><Strong style="font-family: 'Courier New', Courier, monospace;">Skin Care</Strong></h5>
+                        <p class="card-text text-dark"> <strong>Rs.2299</strong></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4" style="margin-top: 3%;">
+
+                <div class="card COL6" style="width: 25rem; text-align: center;">
+                   
+                    <!-- <div class="card-body">
+                        <h5 class="card-title "><Strong style="font-family: 'Courier New', Courier, monospace;">Hair Care</Strong></h5>
+                        <p class="card-text text-dark"> <strong>Rs.2599</strong></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div> <br><br><br>
+    
+    <div class="container-fluid">
+        <h3 style="font-family: cursive;" class="text-center"> <b> Love & Engagement</b></h3>
+        <h6 class="text-center mt-0">By ROCK PARADISE</h6>
+        <hr style="color: black; margin: auto;height: 5px;margin-bottom:20px ;width: 100px;;">
+
+    </div><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 pt-5 pb-2 ">
+                <div style="margin-top: 40%;">
+                    <h3 class="text-center">Love & Engagemnet</h3>
+                    <p class="text-center">Love comes in all shapes and sizes. So do Tiffany engagement rings. We’re
+                        here to help you discover the ultimate symbols of love and commitment for your unique
+                        relationship. </p>
+                </div>
+            </div>
+            <div class="col-9 pt-3 pb-2 ">
+                <video width="100%" height="100%" autoplay muted loop playsinline disablepictureinpicture preload="auto"
+                    data-preload="true" src="/video tiffany/tiffany.mp4" class="load-lazily b-loaded"
+                    poster="//media.tiffany.com/is/image/tiffanydm/2022_LE-LP-Tile-1-Mobile?$tile$&&hei=900">…</video>
+            </div>
+
+        </div>
+
+    </div> <br> <br><br><br><br>
+    <div class="container">
+        <h3 class="text-center mb-3" style="font-family:  cursive;"> <b> Our Engagement Rings Collections</b></h3>
+        <hr style="color: black; margin: auto;height: 5px;margin-bottom:20px ;width: 100px;;">
+        <div class="row ">
+            <div class="col-md-6 col-sm-12 col-lg-3 mt-5">
+                <div class="product-grid2">
+                    <div class="product-image2">
+                        <a href="#">
+                            <img src="/image/ring1.jfif" alt="">
+                        </a>
+                        <!-- <ul class="social">
+                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul> -->
+                        <a class="add-to-cart" href="">Add to cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#"></a> Engagement Ring</h3>
+                        <span class="price">$599.99</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12 col-lg-3">
+                <div class="product-grid2">
+                    <div class="product-image2">
+                        <a href="#">
+
+                            <img src="/image/ring2.jfif" alt="">
+                        </a>
+                        <!-- <ul class="social">
+                          <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                          <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                          <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                      </ul> -->
+                        <a class="add-to-cart" href="">Add to cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#"></a>Engagement Ring</h3>
+                        <span class="price">$699.99</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-3">
+                <div class="product-grid2">
+                    <div class="product-image2">
+                        <a href="#">
+                            <img src="/image/ring33.jpg" alt="">
+                        </a>
+                        <!-- <ul class="social">
+                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul> -->
+                        <a class="add-to-cart" href="">Add to cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#"></a>Engagement Ring</h3>
+                        <span class="price">$599.99</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-3">
+                <div class="product-grid2">
+                    <div class="product-image2">
+                        <a href="#">
+                            <img src="/image/ring4.jfif" alt="">
+                        </a>
+                        <!-- <ul class="social">
+                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul> -->
+                        <a class="add-to-cart" href="">Add to cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#"></a>Engagement Ring</h3>
+                        <span class="price">$599.99</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <br><br>
+    
+
+
+
+    <footer class="text-center text-lg-start text-dark rounded " style="background-color: #f59f2e;">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+
+            <section class="newsletter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="content">
+                                <h2 class="text-white" style="font-family:'Courier New', Courier, monospace;">SUBSCRIBE
+                                    TO GET THR LATEST FROM ROCK PARADISE</h2>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Enter your email">
+                                    <span class="input-group-btn">
+                                        <button class="btn" type="submit">Subscribe Now</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr class="my-3">
+            <!-- Section: Links -->
+
+            <!--Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto pt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white"
+                        style="font-family:'Courier New', Courier, monospace;"><b>Shop</b>
+                    </h5>
+                    <p class="text-white"> 
+                        Promotion & Offers,
+                        Charms,
+                        Bracelets,
+                        Rings,
+                        Necklaces & Pendants,
+                        Earrings,
+                        Rock Paradise Collections</p> <br>
+                    <h5 class=" text-white" style="font-family:'Courier New', Courier, monospace;"><b>ABOUT US</b></h5>
+                    <br>
+                    <p>
+                        <a class="text-white"> About Rock Paradise</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Privacy Poilicy</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Terms & Condition</a>
+                    </p>
+
+
+
+
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="w-100 clearfix d-md-none" />
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto pt-3 text-dark">
+                    <h5 class="text-uppercase mb-4 font-weight-bold  text-white "
+                        style="font-family:'Courier New', Courier, monospace;"> <b>Customer Service</b> </h5>
+                    <p>
+                        <a class="text-white">FAQS</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Order</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Shipping</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Returns</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Product And Care</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Warranty</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Contact Us</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="w-100 clearfix d-md-none" />
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <div class="social-follow">
+                        <h5 class="   text-white social-follow title"
+                            style="font-family:'Courier New', Courier, monospace; ">
+                            <b>SERVICES</b>
+                        </h5>
+                        <br>
+                        <p>
+                            <a class="text-white">All Service And Offerings</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Buy Online Pick Up in store</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Smart Gift</a>
+                        </p>
+                        <p>
+                            <a class="text-white">In Store</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Smart Gift</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Student Discount Programs</a>
+                        </p>
+                        <p>
+                            <a class="text-white"></a>
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- Grid column -->
+                <hr class="w-100 clearfix d-md-none" />
+
+                <!-- Grid column -->
+                <!-- <div class="col-md-4 col-lg-3 col-xl-3 mx-auto pt-3">
+                    <img src="/image/outstanding daimond.jpg" class="rounded-circle img-fluid"
+                        style="width: 400px; height: 250px;"><br> <br>
+                    <h4 style="font-family:cursive ;" class="text-center">ROCK PARADISE</h4>
+                </div> -->
+                <!-- Grid column -->
+
+            </div>
+            <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+
+            <hr class="my-3">
+
+
+            <!-- Section: Copyright -->
+            <section class="p-3 pt-0">
+                <div class="row d-flex align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-md-7 col-lg-8 text-center text-md-start">
+                        <!-- Copyright -->
+                        <div class="p-3">
+
+                            <a class="text-dark" href="https://mdbootstrap.com/">Rockparadise.com</a>
+
+                        </div>
+                        <!-- Copyright -->
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                        <!-- Facebook -->
+                        <a class="btn btn-outline-dark btn-floating m-1" class="text-dark" role="button">
+                            <img src="/Footer Icon/facebook.png" style="width: 30px;" alt=""></a>
+
+                        <!-- Twitter -->
+                        <a class="btn btn-outline-dark btn-floating m-1" class="text-dark" role="button">
+                            <img src="/Footer Icon/insta.jfif" style="width: 30px;" alt=""> </a>
+
+                        <a class="btn btn-outline-dark btn-floating m-1" class="text-dark" role="button">
+                            <img src="/Footer Icon/whtsapp.png" style="width: 30px;" alt=""> </a>
+
+                        <a class="btn btn-outline-dark btn-floating m-1" class="text-dark" role="button">
+                            <img src="/Footer Icon/twitter.png" style="width: 30px;" alt=""> </a>
+                        <a class="btn btn-outline-dark btn-group m-1" class="text-dark" role="button">
+                            <img src="/Footer Icon/goolge.jfif" style="width: 30px;" alt=""> </a>
+
+
+                    </div>
+            </section>
+
+        </div>
+
+    </footer>
+    <!-- Footer -->
+    </div>
+</body>
+
+</html>

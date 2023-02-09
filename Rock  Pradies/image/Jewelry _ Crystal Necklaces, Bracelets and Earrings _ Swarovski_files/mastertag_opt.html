@@ -1,0 +1,2407 @@
+<!DOCTYPE html>
+<!-- saved from url=(0129)https://opt.kuponacdn.de/mastertag_opt.html?v=000dbedbbbaf5e4d&kp_customer_id=123456789&kp_ref=https%3A%2F%2Fwww.swarovski.com%2F -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	font-family:arial;
+	font-size:12px;
+}
+</style>
+</head>
+<body>
+<script type="text/javascript">
+var url = document.location + '';
+var querystring = url.replace(/.*\?/g, "");
+var querystring_conf = '';
+if(url != querystring) {
+    var valid_params = ['v', 't', 'rnd'];
+    var params = querystring.split("&");
+
+    for(var i = 0; i < params.length; i++) {
+        if(params[i] == "") continue;
+        var pair = params[i].split('=');
+        while(pair.length<2) pair.push('');
+        if(pair.length>2) {
+			var slice_index = 1;
+			while(pair[slice_index]=="") slice_index++;
+			pair = [ pair[0], pair.slice(slice_index).join("=") ];
+		}
+		if(pair[0].length>0 && pair[0].substr(0,1).match(/[a-z]/i)) {
+			if(valid_params.indexOf(pair[0])!==-1) {
+				querystring_conf = "?" + pair[0] + "=" + pair[1];
+			}
+		}
+    }
+}
+document.write('<scr'+'ipt type="text/javascript" src="https://opt.kuponacdn.de/mastertag_opt_conf.js'+querystring_conf+'"></scr'+'ipt>');
+</script><script type="text/javascript" src="./mastertag_opt_conf.js.download"></script>
+<script type="text/javascript">
+(function(w) {
+	var constants = {
+		constants : {},
+		defineConstants : function() {
+			var constants = {};
+			if(typeof w.KPMasterTagConsent === "object" && (typeof w.KPMasterTagConsent.kp_type === "undefined" || w.KPMasterTagConsent.kp_type === "config") && typeof w.KPMasterTagConsent.constants !== "undefined") {
+				constants = w.KPMasterTagConsent.constants;
+			}
+			
+			for(var prop in constants) {
+				if(!constants.hasOwnProperty(prop)) continue;
+				
+				this.defineConstant(prop, constants[prop]);
+			}
+		},
+		defineConstant : function(key, value) {
+			Object.defineProperty(this.constants, key, {
+				value : value,
+				writable : false,
+				enumerable : false
+			});
+		},
+		init : function() {
+			this.defineConstants();
+			
+			return this.constants;
+		}
+	}.init();
+	
+	var debug = false, async = true, conf = null, d = w.document;
+	if(typeof w.KPMasterTagConsent === "object" && (typeof w.KPMasterTagConsent.kp_type === "undefined" || w.KPMasterTagConsent.kp_type === "config")) {
+		conf = w.KPMasterTagConsent;
+	}
+	if(typeof w.KPMasterTagConsent === "undefined" || (conf !== null)) {
+		var ts = Math.floor(new Date().getTime() / 1000);
+		w.KPMasterTagConsent = {
+			kp_type : "consent_connector",
+			kp_ver : "1.0.0",
+			defaultConf : {},
+			conf : {
+				timestamp : "",
+				customer_id : "",
+				referrer : "",
+				advertiser_decision : "",
+				user_decision : ""
+			},
+			init : function(debug, useTimeout, conf) {
+				if(conf===null) return;
+					
+				this.getConf = function() {
+					return conf;
+				}
+				
+				this.setParent();
+				
+				this.cookie.init();
+				this.params.init();
+				this.distinction.init();
+				this.documentation.init();
+				this.action.init();
+			},
+			setParent : function() {
+				for(var prop in this) {
+					if(!this.hasOwnProperty(prop)) continue;
+					
+					if(typeof this[prop]=="object" && typeof this[prop].parent!="undefined" && this[prop].parent===null) {
+						this[prop].parent = this;
+					}
+				}
+			},
+			params : {
+				parent : null,
+				params : {},
+				defaults : {
+					kp_customer_id : null,
+					kp_pixel_id : null,
+					kp_combined_opt : null,
+					kp_customer_opt : null,
+					kp_user_opt : null,
+					kp_iab_opt : null,
+					kp_call_source : null,
+					kp_ref : null
+				},
+				init : function() {
+					this.getDefaults();
+					this.getUrlParams();
+					this.cleanupUrlParams();
+					if(this.hasIabParams()) {
+						this.parent.iab.init();
+					}
+				},
+				getDefaults : function() {
+					for(var prop in this.defaults) {
+						if(!this.defaults.hasOwnProperty(prop)) continue;
+						
+						this.params[ prop ] = this.defaults[ prop ];
+					}
+				},
+				getUrlParams : function() {
+					var url = d.location + '';
+					var querystring = url.replace(/.*\?/g, "");
+					if(url != querystring) {
+					    var params = querystring.split("&");
+
+					    for(var i = 0; i < params.length; i++) {
+					        if(params[i] == "") continue;
+					        var pair = params[i].split('=');
+					        while(pair.length<2) pair.push('');
+					        if(pair.length>2) {
+								var slice_index = 1;
+								while(pair[slice_index]=="") slice_index++;
+								pair = [ pair[0], pair.slice(slice_index).join("=") ];
+							}
+							if(pair[0].length>0 && pair[0].substr(0,1).match(/[a-z]/i)) {
+								this.params[ this.decode(pair[0]) ] = this.decode(pair[1]);
+							}
+					    }
+					}
+				},
+				cleanupUrlParams : function() {
+					if(this.params['kp_pixel_id']!=null && (this.params['kp_customer_id']==null || this.params['kp_user_opt']==null)) {
+						this.params['kp_pixel_id'] = null;
+					}
+					if(this.hasIabParams() && (this.params['kp_user_opt']!=null || this.params['kp_customer_opt']!=null)) {
+						this.params['kp_user_opt'] = null;
+						this.params['kp_customer_opt'] = null;
+					}
+				},
+				decode : function(param) {
+					try {
+						param = decodeURIComponent(param);
+					} catch(e) {
+						param = unescape(param);
+					}
+					return param;
+				},
+				get : function(key) {
+					return this.params[key];
+				},
+				set : function(key, val) {
+					this.params[key] = val;
+				},
+				hasIabParams : function() {
+					var hasIabParams = false;
+					for(var i in this.params) {
+						if(!this.params.hasOwnProperty(i)) continue;
+						if(i.indexOf('gdpr')==0) {
+							hasIabParams = true;
+							break;
+						}
+					}
+					
+					return hasIabParams;
+				},
+				getIabParams : function() {
+					var iabParams = {};
+					for(var i in this.params) {
+						if(!this.params.hasOwnProperty(i)) continue;
+						if(i.indexOf('gdpr')==0) {
+							iabParams[i] = this.params[i];
+						}
+					}
+					
+					return iabParams;
+				}
+			},
+			iab : {
+				parent : null,
+				data : {},
+				kp_vendor_id : conf['global'].iab_vendor_id,
+				kp_purpose_ids : conf['global'].iab_purpose_ids,
+				kp_leg_int_purpose_ids : conf['global'].iab_leg_int_purpose_ids,
+				decode : {
+					convertBitstringToInteger : function(binStr) {
+						return parseInt(binStr, 2);
+					},
+					convertByteToBitstring : function(byteVar) {
+						return this.zeroPad(byteVar.toString(2));
+					},
+					decodeBase64ToArrayBuffer : function(b64, win) {
+						if(typeof win=="undefined") win = w;
+						var binaryString = win.atob(this.prepareBase64ForDecode(b64));
+						var len = binaryString.length;
+						var bytes = new Uint8Array(len);
+						for(var i = 0; i < len; i += 1) {
+							bytes[i] = binaryString.charCodeAt(i);
+						}
+						return bytes;
+					},
+					prepareBase64ForDecode : function(b64) {
+						var unsafe = b64;
+						while(unsafe.length % 4 !== 0) {
+							unsafe += "=";
+						}
+						unsafe = unsafe.replace(/-/g, "+").replace(/_/g, "/");
+						return unsafe;
+					},
+					zeroPad : function(text, size) {
+						if(typeof size=="undefined") size = 8;
+						var output = text;
+						while(output.length < size) {
+							output = '0' + output;
+						}
+						return output;
+					}
+				},
+				VendorRangeEntry : function() {
+					this.containsVendorID = function(vendorID) {
+						return this.vendorIDs.indexOf(vendorID) >= 0;
+					};
+					this.vendorIDGreaterThanMax = function(vendorID) {
+						return vendorID > this.maxVendorID;
+					};
+
+					var args = arguments;
+					this.maxVendorID = null;
+					this.minVendorID = null;
+					this.vendorIDs = [];
+					if(args.length === 1) {
+						this.vendorIDs.push(args[0]);
+						this.maxVendorID = this.minVendorID = args[0];
+					} else if(args.length === 2) {
+						this.minVendorID = args[0];
+						this.maxVendorID = args[1];
+						for(let i = this.minVendorID; i <= this.maxVendorID; i += 1) {
+							this.vendorIDs.push(i);
+						}
+					} else {
+						throw new Error('Expected 1 or 2 arguments, received ' + args.length);
+					}
+				},
+				ConsentStringParser : function(consentString, parent) {
+					var convertBitstringToInteger = function() { return parent.decode.convertBitstringToInteger.apply(parent.decode, arguments); };
+					var convertByteToBitstring = function() { return parent.decode.convertByteToBitstring.apply(parent.decode, arguments); };
+					var decodeBase64ToArrayBuffer = function() { return parent.decode.decodeBase64ToArrayBuffer.apply(parent.decode, arguments); };
+					var VendorRangeEntry = parent.VendorRangeEntry;
+					
+					this.TCF_VERSION_1_1 = 1.1;
+					this.TCF_VERSION_2_0 = 2.0;
+					
+					this.RESTRICTION_TYPE_NOT_ALLOWED = 0;
+					this.RESTRICTION_TYPE_CONSENT = 1;
+					this.RESTRICTION_TYPE_LEGITIMATE_INTEREST = 2;
+					this.RESTRICTION_TYPE_UNDEFINED = 3;
+					
+					this.VENDOR_BITFIELD_LEGITIMATE_INTEREST_OFFSET;
+					this.ENCODING_TYPE_LEGITIMATE_INTEREST_OFFSET;
+					
+					var CMP_ID_OFFSET, CMP_ID_SIZE, CMP_VERSION_OFFSET, CMP_VERSION_SIZE, DEFAULT_CONSENT_OFFSET, ENCODING_TYPE_OFFSET, ENCODING_TYPE_SIZE, NUM_ENTRIES_OFFSET, NUM_ENTRIES_SIZE;
+					var PURPOSES_OFFSET, PURPOSES_SIZE, PURPOSES_LEGITIMATE_INTEREST_OFFSET, PURPOSES_LEGITIMATE_INTEREST_SIZE, RANGE_ENTRY_OFFSET, VENDOR_BITFIELD_OFFSET;
+					var VENDOR_ENCODING_BITFIELD, VENDOR_ENCODING_RANGE, VENDOR_ID_SIZE, VERSION_BIT_OFFSET, VERSION_BIT_SIZE, MAX_VENDOR_ID_OFFSET, MAX_VENDOR_ID_SIZE;
+					var NUM_PUB_RESTRICTIONS_OFFSET, NUM_PUB_RESTRICTIONS_SIZE, PURPOSE_ID_SIZE, RESTRICTION_TYPE_SIZE;
+					
+					var CONSENT_STRING_ERROR_MESSAGE = 'Invalid consent string value';
+					
+					this._checkTCFVersion = function() {
+						var tmp;
+						switch(consentString.charAt(0)) {
+							case "B":
+								tmp = this.TCF_VERSION_1_1;
+								break;
+							case "C":
+								tmp = this.TCF_VERSION_2_0;
+								break;
+							default:
+								tmp = this.TCF_VERSION_1_1;
+								break;
+						}
+						this.tcfVersion = tmp;
+						return tmp;
+					}
+					this._initVars = function() {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							CMP_ID_OFFSET = 78;
+							CMP_ID_SIZE = 12;
+							CMP_VERSION_OFFSET = 90;
+							CMP_VERSION_SIZE = 12;
+							DEFAULT_CONSENT_OFFSET = 173;
+							ENCODING_TYPE_OFFSET = 172;
+							ENCODING_TYPE_SIZE = 1;
+							NUM_ENTRIES_OFFSET = 174;
+							NUM_ENTRIES_SIZE = 12;
+							PURPOSES_OFFSET = 132;
+							PURPOSES_SIZE = 24;
+							RANGE_ENTRY_OFFSET = 186;
+							VENDOR_BITFIELD_OFFSET = 173;
+							VENDOR_ENCODING_BITFIELD = 0;
+							VENDOR_ENCODING_RANGE = 1;
+							VENDOR_ID_SIZE = 16;
+							VERSION_BIT_OFFSET = 0;
+							VERSION_BIT_SIZE = 6;
+							MAX_VENDOR_ID_OFFSET = 156;
+							MAX_VENDOR_ID_SIZE = 16;
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							CMP_ID_OFFSET = 78;
+							CMP_ID_SIZE = 12;
+							CMP_VERSION_OFFSET = 90;
+							CMP_VERSION_SIZE = 12;
+							ENCODING_TYPE_OFFSET = 229;
+							ENCODING_TYPE_SIZE = 1;
+							NUM_ENTRIES_OFFSET = 230;
+							NUM_ENTRIES_SIZE = 12;
+							PURPOSES_OFFSET = 152;
+							PURPOSES_SIZE = 24;
+							PURPOSES_LEGITIMATE_INTEREST_OFFSET = 176;
+							PURPOSES_LEGITIMATE_INTEREST_SIZE = 24;
+							RANGE_ENTRY_OFFSET = 242;
+							VENDOR_BITFIELD_OFFSET = 230;
+							VENDOR_ENCODING_BITFIELD = 0;
+							VENDOR_ENCODING_RANGE = 1;
+							VENDOR_ID_SIZE = 16;
+							VERSION_BIT_OFFSET = 0;
+							VERSION_BIT_SIZE = 6;
+							MAX_VENDOR_ID_OFFSET = 213;
+							MAX_VENDOR_ID_SIZE = 16;
+							
+							NUM_PUB_RESTRICTIONS_OFFSET = 0;
+							NUM_PUB_RESTRICTIONS_SIZE = 12;
+							PURPOSE_ID_SIZE = 6;
+							RESTRICTION_TYPE_SIZE = 2;
+						}
+					};
+					this.cmpID = function() {
+						return this._getInt(CMP_ID_OFFSET, CMP_ID_SIZE);
+					};
+					this.cmpVersion = function() {
+						return this._getInt(CMP_VERSION_OFFSET, CMP_VERSION_SIZE);
+					};
+					this.vendorEncodingType = function(encoding_type_offset) {
+						if(typeof encoding_type_offset=="undefined") encoding_type_offset=ENCODING_TYPE_OFFSET;
+						return this._getInt(encoding_type_offset, ENCODING_TYPE_SIZE);
+					};
+					this.version = function() {
+						return this._getInt(VERSION_BIT_OFFSET, VERSION_BIT_SIZE);
+					};
+					this.purposeAllowed = function(purposeID, allowedPurposes) {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							allowedPurposes = this.allowedPurposes;
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							if(typeof allowedPurposes=="undefined") allowedPurposes = this.allowedPurposes;
+						}
+						if(purposeID < 1 || purposeID > allowedPurposes.length) {
+							return false;
+						}
+						return Boolean(allowedPurposes[purposeID - 1]);
+					};
+					this.vendorAllowed = function(vendorID, vendorRangeEntries, vendorBitfieldOffset, encodingOffset) {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							vendorBitfieldOffset = VENDOR_BITFIELD_OFFSET;
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							if(typeof vendorBitfieldOffset=="undefined") vendorBitfieldOffset = VENDOR_BITFIELD_OFFSET;
+						}
+						if(this.vendorEncodingType(encodingOffset) === VENDOR_ENCODING_RANGE) {
+							var present = this._vendorInRange(vendorID, vendorRangeEntries);
+							return present !== Boolean(this.defaultConsent);
+						}
+						try {
+							return Boolean(this._getBit(vendorBitfieldOffset + vendorID - 1));
+						} catch(e) {
+							return false;
+						}
+					};
+					this._getBit = function(offset) {
+						var binStr = this.consentData.substr(offset, 1);
+						return parseInt(binStr, 10);
+					};
+					this._getInt = function(offset, size) {
+						var binStr = this.consentData.substr(offset, size);
+						return convertBitstringToInteger(binStr);
+					};
+					this._checkConsentStringFormat = function() {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							var encodingType = this.vendorEncodingType();
+							if(encodingType === VENDOR_ENCODING_RANGE) {
+								if(this.consentData.length < RANGE_ENTRY_OFFSET) {
+									throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+								} else {
+									var numEntries = this._getInt(NUM_ENTRIES_OFFSET, NUM_ENTRIES_SIZE);
+									if(numEntries > 0) {
+										var currentOffset = RANGE_ENTRY_OFFSET;
+										var maxVendorID = this._getInt(MAX_VENDOR_ID_OFFSET, MAX_VENDOR_ID_SIZE);
+										var maxRangeVendorID = 0;
+										for(var i = 0; i < numEntries; i += 1) {
+											if(this.consentData.length >= currentOffset + 1) {
+												var range = Boolean(this._getBit(currentOffset));
+												currentOffset += 1;
+												if(range) {
+													if(this.consentData.length >= currentOffset + VENDOR_ID_SIZE * 2) {
+														var vendorIDStart = this._getInt(currentOffset, VENDOR_ID_SIZE);
+														var vendorIDEnd = this._getInt(currentOffset + VENDOR_ID_SIZE, VENDOR_ID_SIZE);
+														if(vendorIDStart < vendorIDEnd) {
+															if(vendorIDEnd > maxRangeVendorID) maxRangeVendorID = vendorIDEnd;
+															currentOffset += VENDOR_ID_SIZE * 2;
+														} else {
+															throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+														}
+													} else {
+														throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+													}
+												} else {
+													var vendorID = this._getInt(currentOffset, VENDOR_ID_SIZE);
+													if(this.consentData.length >= currentOffset + VENDOR_ID_SIZE) {
+														if(vendorID > maxRangeVendorID) maxRangeVendorID = vendorID;
+														currentOffset += VENDOR_ID_SIZE;
+													} else {
+														throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+													}
+												}
+											} else {
+												throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+											}
+											if(maxRangeVendorID > maxVendorID) {
+												throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+											}
+										}
+									}
+								}
+							} else
+							if(encodingType === VENDOR_ENCODING_BITFIELD) {
+								if(this.consentData.length < VENDOR_BITFIELD_OFFSET) {
+									throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+								} else {
+									var maxVendorID = this._getInt(MAX_VENDOR_ID_OFFSET, MAX_VENDOR_ID_SIZE);
+									if(this.consentData.length > VENDOR_BITFIELD_OFFSET + maxVendorID) {
+										var excessingBitCount = this.consentData.length - VENDOR_BITFIELD_OFFSET - maxVendorID;
+										this.consentData = this.consentData.slice(0, -excessingBitCount);
+									}
+									if(this.consentData.length != VENDOR_BITFIELD_OFFSET + maxVendorID) {
+										throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+									}
+								}
+							}
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+						}
+					},
+					this._processPurposes = function() {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							this.allowedPurposes = [];
+							for(var i = PURPOSES_OFFSET, max = PURPOSES_OFFSET + PURPOSES_SIZE; i < max; i += 1) {
+								this.allowedPurposes.push(this._getBit(i));
+							}
+							this.purposes = [];
+							for(var i = 1, max = this.allowedPurposes.length; i <= max; i += 1) {
+								if(this.purposeAllowed(i)) {
+									this.purposes.push(i);
+								}
+							}
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							this.allowedPurposes = [], this.allowedPurposesLegitimateInterest = [], this.purposes = [], this.purposesLegitimateInterest = [];
+							for(var i = PURPOSES_OFFSET, max = PURPOSES_OFFSET + PURPOSES_SIZE; i < max; i += 1) {
+								this.allowedPurposes.push(this._getBit(i));
+							}
+							for(var i = 1, max = this.allowedPurposes.length; i <= max; i += 1) {
+								if(this.purposeAllowed(i, this.allowedPurposes)) {
+									this.purposes.push(i);
+								}
+							}
+							for(var i = PURPOSES_LEGITIMATE_INTEREST_OFFSET, max = PURPOSES_LEGITIMATE_INTEREST_OFFSET + PURPOSES_LEGITIMATE_INTEREST_SIZE; i < max; i += 1) {
+								this.allowedPurposesLegitimateInterest.push(this._getBit(i));
+							}
+							for(var i = 1, max = this.allowedPurposesLegitimateInterest.length; i <= max; i += 1) {
+								if(this.purposeAllowed(i, this.allowedPurposesLegitimateInterest)) {
+									this.purposesLegitimateInterest.push(i);
+								}
+							}
+						}
+					};
+					this._processVendorsList = function() {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							var encodingType = this.vendorEncodingType();
+							if(encodingType === VENDOR_ENCODING_RANGE) {
+								this.rangeEntries = [];
+								this.defaultConsent = this._getBit(DEFAULT_CONSENT_OFFSET);
+								var numEntries = this._getInt(NUM_ENTRIES_OFFSET, NUM_ENTRIES_SIZE);
+								var currentOffset = RANGE_ENTRY_OFFSET;
+								for(var i = 0; i < numEntries; i += 1) {
+									var range = Boolean(this._getBit(currentOffset));
+									currentOffset += 1;
+									if(range) {
+										var vendorIDStart = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										var vendorIDEnd = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										this.rangeEntries.push(new VendorRangeEntry(vendorIDStart, vendorIDEnd));
+									} else {
+										var vendorID = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										this.rangeEntries.push(new VendorRangeEntry(vendorID));
+									}
+								}
+								var allowedVendorIDs = [];
+								for(var i = 0; i < this.rangeEntries.length; i += 1) {
+									var rangeEntry = this.rangeEntries[i];
+									allowedVendorIDs = allowedVendorIDs.concat( rangeEntry.vendorIDs );
+								}
+								if(typeof conf['global'].iab_vendor_partners!=="undefined") {
+									var allowedVendorPartners = [];
+									if(conf['global'].iab_vendor_partners.length) {
+										for(var i = 0; i < conf['global'].iab_vendor_partners.length; i += 1) {
+											var vendor = conf['global'].iab_vendor_partners[i];
+											if(allowedVendorIDs.indexOf(vendor[0])!==-1) {
+												allowedVendorPartners.push(vendor[1]);
+											}
+										}
+									} else {
+										allowedVendorPartners.push("all");
+									}
+									/*parent.parent.cookie.set(parent.parent.distinction.getAdvertiserCookieKey() + "_allowed_vendor_partners", allowedVendorPartners, false, false, false);*/
+								}
+							} else
+							if(encodingType === VENDOR_ENCODING_BITFIELD) {
+								maxVendorID = this._getInt(MAX_VENDOR_ID_OFFSET, MAX_VENDOR_ID_SIZE);
+								var allowedVendorIDs = [];
+								for(var i = 1; i <= maxVendorID; i += 1) {
+									var vendorIdConsent = Boolean(this._getBit(VENDOR_BITFIELD_OFFSET + i - 1));
+									if(vendorIdConsent) {
+										allowedVendorIDs.push(i);
+									}
+								}
+								if(typeof conf['global'].iab_vendor_partners!=="undefined") {
+									var allowedVendorPartners = [];
+									if(conf['global'].iab_vendor_partners.length) {
+										for(var i = 0; i < conf['global'].iab_vendor_partners.length; i += 1) {
+											var vendor = conf['global'].iab_vendor_partners[i];
+											if(allowedVendorIDs.indexOf(vendor[0])!==-1) {
+												allowedVendorPartners.push(vendor[1]);
+											}
+										}
+									} else {
+										allowedVendorPartners.push("all");
+									}
+									/*parent.parent.cookie.set(parent.parent.distinction.getAdvertiserCookieKey() + "_allowed_vendor_partners", allowedVendorPartners, false, false, false);*/
+								}
+							}
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							var maxVendorID = 0, currentOffset = 0, numEntries = 0;
+							var encodingType = this._getInt(ENCODING_TYPE_OFFSET, ENCODING_TYPE_SIZE);
+							var allowedVendorPartners = [];
+							if(encodingType === VENDOR_ENCODING_RANGE) {
+								this.rangeEntries = [];
+								numEntries = this._getInt(NUM_ENTRIES_OFFSET, NUM_ENTRIES_SIZE);
+								currentOffset = RANGE_ENTRY_OFFSET;
+								for(var i = 0; i < numEntries; i += 1) {
+									var range = Boolean(this._getBit(currentOffset));
+									currentOffset += 1;
+									if(range) {
+										var vendorIDStart = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										var vendorIDEnd = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										this.rangeEntries.push(new VendorRangeEntry(vendorIDStart, vendorIDEnd));
+									} else {
+										var vendorID = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										this.rangeEntries.push(new VendorRangeEntry(vendorID));
+									}
+								}
+								var allowedVendorIDs = [];
+								for(var i = 0; i < this.rangeEntries.length; i += 1) {
+									var rangeEntry = this.rangeEntries[i];
+									allowedVendorIDs = allowedVendorIDs.concat( rangeEntry.vendorIDs );
+								}
+								if(typeof conf['global'].iab_vendor_partners!=="undefined") {
+									if(conf['global'].iab_vendor_partners.length) {
+										for(var i = 0; i < conf['global'].iab_vendor_partners.length; i += 1) {
+											var vendor = conf['global'].iab_vendor_partners[i];
+											if(allowedVendorIDs.indexOf(vendor[0])!==-1) {
+												allowedVendorPartners.push(vendor[1]);
+											}
+										}
+									} else {
+										allowedVendorPartners.push("all");
+									}
+								}
+							} else
+							if(encodingType === VENDOR_ENCODING_BITFIELD) {
+								maxVendorID = this._getInt(MAX_VENDOR_ID_OFFSET, MAX_VENDOR_ID_SIZE);
+								currentOffset = VENDOR_BITFIELD_OFFSET + maxVendorID;
+								var allowedVendorIDs = [];
+								for(var i = 1; i <= maxVendorID; i += 1) {
+									var vendorIdConsent = Boolean(this._getBit(VENDOR_BITFIELD_OFFSET + i - 1));
+									if(vendorIdConsent) {
+										allowedVendorIDs.push(i);
+									}
+								}
+								if(typeof conf['global'].iab_vendor_partners!=="undefined") {
+									if(conf['global'].iab_vendor_partners.length) {
+										for(var i = 0; i < conf['global'].iab_vendor_partners.length; i += 1) {
+											var vendor = conf['global'].iab_vendor_partners[i];
+											if(allowedVendorIDs.indexOf(vendor[0])!==-1) {
+												allowedVendorPartners.push(vendor[1]);
+											}
+										}
+									} else {
+										allowedVendorPartners.push("all");
+									}
+								}
+							}
+							this.VENDOR_BITFIELD_LEGITIMATE_INTEREST_OFFSET = currentOffset + MAX_VENDOR_ID_SIZE + ENCODING_TYPE_SIZE;
+							var maxVendorIDLegitimateInterestOffset = currentOffset;
+							currentOffset += VENDOR_ID_SIZE;
+							this.ENCODING_TYPE_LEGITIMATE_INTEREST_OFFSET = currentOffset;
+							encodingType = this._getInt(currentOffset, ENCODING_TYPE_SIZE);
+							currentOffset += ENCODING_TYPE_SIZE;
+							if(encodingType === VENDOR_ENCODING_RANGE) {
+								this.rangeEntriesLegitimateInterest = [];
+								numEntries = this._getInt(currentOffset, NUM_ENTRIES_SIZE);
+								currentOffset += NUM_ENTRIES_SIZE;
+								for(var i = 0; i < numEntries; i += 1) {
+									var range = Boolean(this._getBit(currentOffset));
+									currentOffset += 1;
+									if(range) {
+										var vendorIDStart = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										var vendorIDEnd = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										this.rangeEntriesLegitimateInterest.push(new VendorRangeEntry(vendorIDStart, vendorIDEnd));
+									} else {
+										var vendorID = this._getInt(currentOffset, VENDOR_ID_SIZE);
+										currentOffset += VENDOR_ID_SIZE;
+										this.rangeEntriesLegitimateInterest.push(new VendorRangeEntry(vendorID));
+									}
+								}
+								var allowedVendorIDs = [];
+								for(var i = 0; i < this.rangeEntriesLegitimateInterest.length; i += 1) {
+									var rangeEntry = this.rangeEntriesLegitimateInterest[i];
+									allowedVendorIDs = allowedVendorIDs.concat( rangeEntry.vendorIDs );
+								}
+								if(typeof conf['global'].iab_vendor_partners!=="undefined") {
+									if(conf['global'].iab_vendor_partners.length) {
+										for(var i = 0; i < conf['global'].iab_vendor_partners.length; i += 1) {
+											var vendor = conf['global'].iab_vendor_partners[i];
+											if(allowedVendorIDs.indexOf(vendor[0])!==-1) {
+												allowedVendorPartners.push(vendor[1]);
+											}
+										}
+									} else {
+										allowedVendorPartners.push("all");
+									}
+								}
+							} else
+							if(encodingType === VENDOR_ENCODING_BITFIELD) {
+								maxVendorID = this._getInt(maxVendorIDLegitimateInterestOffset, MAX_VENDOR_ID_SIZE);
+								currentOffset = this.VENDOR_BITFIELD_LEGITIMATE_INTEREST_OFFSET + maxVendorID;
+								var allowedVendorIDs = [];
+								for(var i = 1; i <= maxVendorID; i += 1) {
+									var vendorIdConsent = Boolean(this._getBit(this.VENDOR_BITFIELD_LEGITIMATE_INTEREST_OFFSET + i - 1));
+									if(vendorIdConsent) {
+										allowedVendorIDs.push(i);
+									}
+								}
+								if(typeof conf['global'].iab_vendor_partners!=="undefined") {
+									if(conf['global'].iab_vendor_partners.length) {
+										for(var i = 0; i < conf['global'].iab_vendor_partners.length; i += 1) {
+											var vendor = conf['global'].iab_vendor_partners[i];
+											if(allowedVendorIDs.indexOf(vendor[0])!==-1) {
+												allowedVendorPartners.push(vendor[1]);
+											}
+										}
+									} else {
+										allowedVendorPartners.push("all");
+									}
+								}
+							}
+							if(allowedVendorPartners.length) {
+								/*parent.parent.cookie.set(parent.parent.distinction.getAdvertiserCookieKey() + "_allowed_vendor_partners", allowedVendorPartners, false, false, false);*/
+							}
+							NUM_PUB_RESTRICTIONS_OFFSET = currentOffset;
+						}
+					};
+					this._vendorInRange = function(vendorID, vendorRangeEntries) {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							vendorRangeEntries = this.rangeEntries;
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							if(typeof vendorRangeEntries=="undefined") vendorRangeEntries = this.rangeEntries;
+						}
+						var maxIter = 20, iter = 0;
+						var limit = vendorRangeEntries.length;
+						if(limit === 0) {
+							return false;
+						}
+						var index = Math.floor(limit / 2);
+						while(index >= 0 && index < limit && iter < maxIter) {
+							iter++;
+							var entry = vendorRangeEntries[index];
+							if(entry.containsVendorID(vendorID)) {
+								return true;
+							}
+							if(index === 0 || index === limit - 1) {
+								return false;
+							}
+							if(entry.vendorIDGreaterThanMax(vendorID)) {
+								index = index + Math.floor((limit - index) / 2);
+							} else {
+								limit = index;
+								index = Math.floor(index / 2);
+							}
+						}
+						return false;
+					};
+					this._processPublisherRestrictions = function() {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							if(typeof NUM_PUB_RESTRICTIONS_OFFSET!="undefined" && NUM_PUB_RESTRICTIONS_OFFSET) {
+								var currentOffset = NUM_PUB_RESTRICTIONS_OFFSET + NUM_PUB_RESTRICTIONS_SIZE;
+								var numPubRestrictions = this._getInt(NUM_PUB_RESTRICTIONS_OFFSET, NUM_PUB_RESTRICTIONS_SIZE);
+								this.restrictedPurposes = [], this.restrictedPurposesRestrictionTypes = [], this.restrictedPurposesRangeEntries = [];
+								for(var i = 0; i < numPubRestrictions; i += 1) {
+									var purposeId = this._getInt(currentOffset, PURPOSE_ID_SIZE);
+									currentOffset += PURPOSE_ID_SIZE;
+									var restrictionType = this._getInt(currentOffset, RESTRICTION_TYPE_SIZE);
+									currentOffset += RESTRICTION_TYPE_SIZE;
+									var rangeEntriesPubRestrictions = [];
+									var numEntries = this._getInt(currentOffset, NUM_ENTRIES_SIZE);
+									currentOffset += NUM_ENTRIES_SIZE;
+									for(var j = 0; j < numEntries; j += 1) {
+										var range = Boolean(this._getBit(currentOffset));
+										currentOffset += 1;
+										if(range) {
+											var vendorIDStart = this._getInt(currentOffset, VENDOR_ID_SIZE);
+											currentOffset += VENDOR_ID_SIZE;
+											var vendorIDEnd = this._getInt(currentOffset, VENDOR_ID_SIZE);
+											currentOffset += VENDOR_ID_SIZE;
+											rangeEntriesPubRestrictions.push(new VendorRangeEntry(vendorIDStart, vendorIDEnd));
+										} else {
+											var vendorID = this._getInt(currentOffset, VENDOR_ID_SIZE);
+											currentOffset += VENDOR_ID_SIZE;
+											rangeEntriesPubRestrictions.push(new VendorRangeEntry(vendorID));
+										}
+									}
+									
+									var kp_vendor_id = conf['global'].iab_vendor_id;
+									if(this._vendorInRange(kp_vendor_id, rangeEntriesPubRestrictions)) {
+										this.restrictedPurposes.push(purposeId);
+										this.restrictedPurposesRestrictionTypes.push(restrictionType);
+										this.restrictedPurposesRangeEntries.push(rangeEntriesPubRestrictions);
+									}
+								}
+							}
+						}
+					}
+					this.purposeAllowedByPublisher = function(purposeID, vendorConsentType) {
+						if(this.tcfVersion==this.TCF_VERSION_1_1) {
+							return false;
+						} else
+						if(this.tcfVersion==this.TCF_VERSION_2_0) {
+							if(this.restrictedPurposes.length==0) return true;
+							var index = this.restrictedPurposes.indexOf(purposeID);
+							if(index>=0) {
+								var restrictionType = this.restrictedPurposesRestrictionTypes[index];
+								if(restrictionType==this.RESTRICTION_TYPE_NOT_ALLOWED || restrictionType!=vendorConsentType) return false;
+								return true;
+							} else {
+								return true;
+							}
+						}
+					}
+					
+					if(!consentString) {
+						throw new Error(CONSENT_STRING_ERROR_MESSAGE);
+					}
+					this.consentString = consentString;
+					
+					this._checkTCFVersion();
+					if(this.tcfVersion==this.TCF_VERSION_2_0) {
+						consentString = consentString.split(".").shift();
+					}
+					this._initVars();
+					
+					var buff = decodeBase64ToArrayBuffer(consentString);
+					this.consentData = buff.reduce(function(binStr, nextByte) {
+						return binStr + convertByteToBitstring(nextByte);
+					}, "");
+					this._checkConsentStringFormat();
+					this._processPurposes();
+					this._processVendorsList();
+					this._processPublisherRestrictions();
+				},
+				init : function() {
+					var user_opt_prefix = (this.parent.params.hasIabParams()) ? 'exp_' : '';
+					if(this.hasConsent()) {
+						this.parent.params.set('kp_user_opt', user_opt_prefix + 'in');
+					} else {
+						this.parent.params.set('kp_user_opt', user_opt_prefix + 'out');
+					}
+				},
+				hasConsent : function() {
+					if(this.parent.params.hasIabParams()) {
+						var consent_string = this.parent.params.get('gdpr_consent');
+						if(typeof consent_string !== "undefined" && consent_string !== null) {
+							try{
+								var consent_string_parser = new this.ConsentStringParser(consent_string, this);
+								if(typeof consent_string_parser !== "undefined") {
+									if(consent_string_parser.tcfVersion==consent_string_parser.TCF_VERSION_1_1) {
+										var vendor_allowed = false;
+										var purposes_allowed = false;
+										var leg_int_purposes_allowed = false;
+										if( consent_string_parser.vendorAllowed(this.kp_vendor_id) ) {
+											vendor_allowed = true;
+											purposes_allowed = true;
+											leg_int_purposes_allowed = true;
+											if(this.kp_purpose_ids.length) {
+												for(var purpose in this.kp_purpose_ids) {
+													if(!this.kp_purpose_ids.hasOwnProperty(purpose)) continue;
+													
+													if( !consent_string_parser.purposeAllowed(this.kp_purpose_ids[purpose]) ) {
+														purposes_allowed = false;
+														break;
+													}
+												}
+											}
+											if(purposes_allowed) {
+												if(this.kp_leg_int_purpose_ids.length) {
+													for(var purpose in this.kp_leg_int_purpose_ids) {
+														if(!this.kp_leg_int_purpose_ids.hasOwnProperty(purpose)) continue;
+														
+														if( !consent_string_parser.purposeAllowed(this.kp_leg_int_purpose_ids[purpose]) ) {
+															leg_int_purposes_allowed = false;
+															break;
+														}
+													}
+												}
+											}
+										}
+										this.parent.params.set('kp_iab_opt', true);
+										if(vendor_allowed && purposes_allowed && leg_int_purposes_allowed) {
+											return true;
+										}
+									} else
+									if(consent_string_parser.tcfVersion==consent_string_parser.TCF_VERSION_2_0) {
+										var vendor_allowed = false;
+										var leg_int_vendor_allowed = false;
+										var purposes_allowed = true;
+										var leg_int_purposes_allowed = true;
+										if( consent_string_parser.vendorAllowed(this.kp_vendor_id) ) {
+											vendor_allowed = true;
+											if(this.kp_purpose_ids.length) {
+												for(var purpose in this.kp_purpose_ids) {
+													if(!this.kp_purpose_ids.hasOwnProperty(purpose)) continue;
+													if( !consent_string_parser.purposeAllowed(this.kp_purpose_ids[purpose]) || !consent_string_parser.purposeAllowedByPublisher(this.kp_purpose_ids[purpose], consent_string_parser.RESTRICTION_TYPE_CONSENT) ) {
+														purposes_allowed = false;
+														break;
+													}
+												}
+											} else {
+												purposes_allowed = false;
+											}
+										}
+										if( consent_string_parser.vendorAllowed(this.kp_vendor_id, consent_string_parser.rangeEntriesLegitimateInterest, consent_string_parser.VENDOR_BITFIELD_LEGITIMATE_INTEREST_OFFSET, consent_string_parser.ENCODING_TYPE_LEGITIMATE_INTEREST_OFFSET) ) {
+											leg_int_vendor_allowed = true;
+											if(this.kp_leg_int_purpose_ids.length) {
+												for(var purpose in this.kp_leg_int_purpose_ids) {
+													if(!this.kp_leg_int_purpose_ids.hasOwnProperty(purpose)) continue;
+													if( !consent_string_parser.purposeAllowed(this.kp_leg_int_purpose_ids[purpose], consent_string_parser.allowedPurposesLegitimateInterest) || !consent_string_parser.purposeAllowedByPublisher(this.kp_leg_int_purpose_ids[purpose], consent_string_parser.RESTRICTION_TYPE_LEGITIMATE_INTEREST) ) {
+														leg_int_purposes_allowed = false;
+														break;
+													}
+												}
+											} else {
+												leg_int_purposes_allowed = false;
+											}
+										}
+										this.parent.params.set('kp_iab_opt', true);
+										if((vendor_allowed && purposes_allowed) || (leg_int_vendor_allowed && leg_int_purposes_allowed)) {
+											return true;
+										}
+									}
+								}
+							} catch(e) {
+								console.log('%cError: ' + e.message, 'color:red');
+							}
+						}
+					}
+					return false;
+				}
+			},
+			cookie : {
+				parent : null,
+				json_identifier : "JSON:",
+				data : {},
+				defaults : {
+					expires : 60 * 60 * 24 * 365,
+					path : "/",
+					same_site : "none",
+					secure : true
+				},
+				set : function(key, val, options, do_track , do_cleanup) {
+					if(typeof do_track=="undefined") do_track = true;
+					if(typeof do_cleanup=="undefined") do_cleanup = true;
+					
+					this.data[key] = val;
+					
+					options = options || this.defaults || {};
+					
+					key = encodeURIComponent(key);
+					
+					var val_raw = JSON.parse(JSON.stringify(val));
+					if(typeof val == "object") val = this.json_identifier + JSON.stringify(val);
+					val = encodeURIComponent(val);
+					
+					var expire_date = new Date();
+					expire_date.setTime((this.getTimestamp() + this.defaults.expires) * 1000);
+					
+					var cookieString = key + '=' + val;
+					cookieString += options.path ? ';path=' + options.path : '';
+					cookieString += options.domain ? ';domain=' + options.domain : '';
+					cookieString += options.expires ? ';expires=' + expire_date.toUTCString() : '';
+					cookieString += options.same_site ? ';samesite=' + options.same_site : '';
+					cookieString += options.secure ? ';secure' : '';
+					
+					d.cookie = cookieString;
+					
+					if(key!=="opt_last" && key!=="opt_keys" && key.indexOf("allowed_vendor_partners")==-1 && key.indexOf("gdpr")==-1) {
+						if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_log_last_opt!="undefined" && conf['global'].cookie_log_last_opt) {
+							this.set("opt_last", val_raw, options);
+						}
+						if(do_track) this.trackKey(key, options);
+						if(do_cleanup) this.cleanup(key, options);
+					}
+				},
+				unset : function(key, options) {
+					options = options || this.defaults || {};
+					
+					var expire_date = new Date();
+					expire_date.setTime(1000);
+					
+					var cookieString = key + '=';
+					cookieString += options.path ? ';path=' + options.path : '';
+					cookieString += options.domain ? ';domain=' + options.domain : '';
+					cookieString += options.expires ? ';expires=' + expire_date.toUTCString() : '';
+					cookieString += options.same_site ? ';samesite=' + options.same_site : '';
+					cookieString += options.secure ? ';secure' : '';
+					
+					d.cookie = cookieString;
+					
+					delete this.data[key];
+					
+					if(key!=="opt_last" && key!=="opt_keys" && key.indexOf("allowed_vendor_partners")==-1 && key.indexOf("gdpr")==-1) {
+						this.untrackKey(key, options);
+					}
+				},
+				get : function(key, subkey) {
+					if(typeof subkey!="undefined" && typeof this.data[key]!="undefined") {
+						return this.data[key][subkey];
+					} else 
+						return this.data[key];
+				},
+				getDefaults : function() {
+					if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_lifetime!="undefined") {
+						this['defaults'].expires = conf['global'].cookie_lifetime;
+					}
+				},
+				getData : function() {
+					var documentCookie = d.cookie;
+					var cookieCache = {};
+		            var cookiesArray = documentCookie ? documentCookie.split('; ') : [];
+		            
+		            for(var i=0; i<cookiesArray.length; i++) {
+		            	var cookieString = cookiesArray[i];
+		            	
+		            	var separatorIndex = cookieString.indexOf('=');
+		            	separatorIndex = separatorIndex < 0 ? cookieString.length : separatorIndex;
+		            	
+		            	var key = cookieString.substr(0, separatorIndex);
+		            	key = decodeURIComponent(key);
+		            	
+		            	var val = cookieString.substr(separatorIndex + 1);
+		            	val = decodeURIComponent(val);
+		            	
+		            	if(val.indexOf(this.json_identifier)===0) val = JSON.parse(val.substr(5));
+		            	
+		            	cookieCache[key] = val;
+		            }
+		            
+		            this.data = cookieCache;
+				},
+				getTimestamp : function() {
+					if(!Date.now) {
+					    Date.now = function() { return new Date().getTime(); }
+					}
+					
+					return Math.floor(Date.now() / 1000);
+				},
+				trackKey : function(key, options) {
+					if(key=="opt_keys") return;
+					
+					options = options || this.defaults || {};
+					
+					var keys = this.get("opt_keys");
+					if(typeof keys!=="undefined") {
+						for(var i=0, i_count=0, i_max_count=keys.length; i<keys.length && i_count<i_max_count; i++, i_count++) {
+							if(!keys.hasOwnProperty(i)) continue;
+							if(typeof this.get(keys[i])=="undefined" || keys[i].indexOf("allowed_vendor_partners")!==-1 || keys[i].indexOf("gdpr")!==-1) {
+								this.untrackKey(keys[i]);
+								i--;
+							}
+						}
+					}
+					if(typeof keys==="undefined") {
+						keys = new Array("opt_keys");
+						for(var i in this.data) {
+							if(!this.data.hasOwnProperty(i)) continue;
+							if(i.indexOf("allowed_vendor_partners")==-1 && i.indexOf("gdpr")==-1) {
+								keys.push(i);
+							}
+						}
+						if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_log_last_opt!="undefined" && conf['global'].cookie_log_last_opt) {
+							keys.push("opt_last");
+						}
+					}
+					key = this.parent.distinction.getAdvertiserCookieKey();
+					if(keys.indexOf(key)!==-1) {
+						keys.splice(keys.indexOf(key), 1);
+					}
+					keys.push(key);
+					keys = keys.join("|").split("|");
+					this.set("opt_keys", keys, options);
+				},
+				untrackKey : function(key, options) {
+					if(key=="opt_keys") return;
+					
+					options = options || this.defaults || {};
+					
+					if(typeof this.data['opt_keys']!="undefined") {
+						if(this.data['opt_keys'].indexOf(key)!==-1) {
+							this.data['opt_keys'].splice(this.data['opt_keys'].indexOf(key), 1);
+							this.set("opt_keys", this.data['opt_keys'], options);
+						}
+					}
+				},
+				cleanup : function(key, options) {
+					if(key=="opt_keys") return;
+					
+					options = options || this.defaults || {};
+					
+					if(typeof this.get("allowed_vendor_partners")!=="undefined") this.unset("allowed_vendor_partners", options);
+					if(typeof conf['global']!="undefined" && (typeof conf['global'].cookie_log_gdpr_params=="undefined" || !conf['global'].cookie_log_gdpr_params)) {
+						for(var i in this.data) {
+							if(i.indexOf("gdpr")!==-1) {
+								this.unset(i, options);
+							}
+						}
+					}
+					
+					var max_cookies_buffer = (typeof conf['global']!="undefined" && typeof conf['global'].cookie_max_buffer!="undefined" && conf['global'].cookie_max_buffer) ? conf['global'].cookie_max_buffer : 5;
+					var max_cookies_length = (typeof conf['global']!="undefined" && typeof conf['global'].cookie_max_length!="undefined" && conf['global'].cookie_max_length) ? conf['global'].cookie_max_length : 7000;
+					var max_cookies_length_min_count = (typeof conf['global']!="undefined" && typeof conf['global'].cookie_max_length_min_count!="undefined" && conf['global'].cookie_max_length_min_count) ? conf['global'].cookie_max_length_min_count : 10;
+					var max_cookies = this.browser.getMaxCookies();
+					if(Object.keys(this.data).length>max_cookies-max_cookies_buffer || (Object.keys(this.data).length>max_cookies_length_min_count && this.getCookieLength()>max_cookies_length)) {
+						var cookie_deleted = false;
+						
+						var cookie_opt_types = ['imp_in', 'imp_out', 'exp_in'];
+						for(var t in cookie_opt_types) {
+							if(cookie_deleted) break;
+							
+							if(!cookie_opt_types.hasOwnProperty(t)) continue;
+							
+							var cookie_opt_type = cookie_opt_types[t];
+							
+							var oldest_cookie_key = this.getOldestCookieKey(key, cookie_opt_type);
+							if(typeof oldest_cookie_key!="undefined") {
+								this.unset(oldest_cookie_key, options);
+								this.unset(oldest_cookie_key + "_allowed_vendor_partners", options);
+								this.unset(oldest_cookie_key + "_gdpr", options);
+								cookie_deleted = true;
+							}
+						}
+						if(cookie_deleted) {
+						}
+						
+						var cookie_referrer_resetted = false;
+						var run_count = 0, max_run_count = Object.keys(this.data).length, last_key="";
+						while(typeof last_key!=="undefined" && max_run_count>max_cookies_length_min_count && this.getCookieLength()>max_cookies_length && run_count<max_run_count) {
+							var cl = this.getCookieLength();
+							var oldest_cookie_key = this.getOldestCookieKeyWithReferrer();
+							if(typeof oldest_cookie_key!="undefined") {
+								var val = this.data[oldest_cookie_key];
+								if(val.referrer!=="-") {
+									val.referrer = "-";
+									this.data[oldest_cookie_key] = val;
+									this.set(oldest_cookie_key, val, options, false, false);
+									cookie_referrer_resetted = true;
+								}
+							}
+							last_key = oldest_cookie_key;
+							run_count++;
+						}
+						if(cookie_referrer_resetted) {
+						}
+						
+						if(typeof last_key==="undefined" && this.getCookieLength()>max_cookies_length) {
+							var val = this.data[key];
+							val.customer_id = null;
+							if(this.parent.params.get("kp_customer_id")) {
+								this.parent.params.set("kp_customer_id", null);
+							}
+							for(var i in this.data) {
+								if(!this.data.hasOwnProperty(i)) continue;
+								
+								if(i!=="opt_last" && i!=="opt_keys" && i.indexOf("allowed_vendor_partners")==-1 && i.indexOf("gdpr")==-1) { 
+									this.unset(i, options);
+									this.unset(i + "_allowed_vendor_partners", options);
+									this.unset(i + "_gdpr", options);
+								}
+							}
+							this.set("global_opt", val, options, true, false);
+						}
+					}
+				},
+				getCookieLength : function() {
+					var c_length_total = 0, c_length = 0;
+					for(var i in this.data) {
+						if(!this.data.hasOwnProperty(i)) continue;
+						
+						var val = this.data[i];
+						
+						i = encodeURIComponent(i);
+						
+						var val_raw = JSON.parse(JSON.stringify(val));
+						if(typeof val == "object") val = this.json_identifier + JSON.stringify(val);
+						val = encodeURIComponent(val);
+						
+						var cookieString = i + '=' + val;
+						c_length = cookieString.length;
+						c_length_total+= c_length;
+					}
+					return c_length_total;
+				},
+				getOldestCookieKeyWithReferrer : function() {
+					return this.getOldestCookieKey(false, false, true);
+				},
+				getOldestCookieKey : function(key, cookie_opt_type, with_referrer) {
+					if(typeof with_referrer==="undefined") with_referrer = false;
+					
+					var oldest_cookie_key, oldest_cookie_timestamp=new Date().getTime();
+					for(var i in this.data) {
+						if(!this.data.hasOwnProperty(i)) continue;
+						
+						if(i!==key && i!=="opt_last" && i!=="opt_keys" && i.indexOf("allowed_vendor_partners")==-1 && i.indexOf("gdpr")==-1) {
+							var cookie = this.data[i];
+							
+							if(!with_referrer || (typeof cookie.referrer!=="undefined" && cookie.referrer!="-")) {
+								if(!cookie_opt_type || (typeof cookie.user_decision!=="undefined" && cookie.user_decision.indexOf(cookie_opt_type)!=-1)) {
+									if(cookie.timestamp<oldest_cookie_timestamp) {
+										oldest_cookie_timestamp = cookie.timestamp;
+										oldest_cookie_key = i;
+									}
+								}
+							}
+						}
+					}
+					return oldest_cookie_key;
+				},
+				browser : {
+					name : null,
+					max_cookie_count : null,
+					getName : function() {
+						if(this.name!==null) return this.name;
+						
+						var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+						var isFirefox = typeof InstallTrigger !== 'undefined';
+						var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+						var isIE = /*@cc_on!@*/false || !!document.documentMode;
+						var isEdge = !isIE && !!window.StyleMedia;
+						var isChrome = !!window.chrome/* && !!window.chrome.webstore*/;
+						var isBlink = (isChrome || isOpera) && !!window.CSS;
+						
+						return this.name = isOpera ? 'Opera' :
+							isFirefox ? 'Firefox' :
+							isSafari ? 'Safari' :
+							isChrome ? 'Chrome' :
+							isIE ? 'IE' :
+							isEdge ? 'Edge' :
+							isBlink ? 'Blink' :
+							"unknown";
+					},
+					getMaxCookies : function() {
+						if(this.max_cookie_count!==null) return this.max_cookie_count;
+						
+						var max_cookie_count;
+						switch(this.getName()) {
+							case 'Chrome':
+								max_cookie_count = 180;
+								break;
+							case 'Firefox':
+								max_cookie_count = 150;
+								break;
+							case 'IE':
+							case 'Edge':
+								max_cookie_count = 150;
+								break;
+							case 'Opera':
+								max_cookie_count = 180;
+								break;
+							case 'Safari':
+								max_cookie_count = 180;
+								break;
+							default:
+								max_cookie_count = 30;
+								break;
+						}
+						return this.max_cookie_count = max_cookie_count;
+					}
+				},
+				init : function() {
+					this.getDefaults();
+					
+					this.getData();
+				}
+			},
+			distinction : {
+				parent : null,
+				data : {
+					documentation : false,
+					documentation_type : false,
+					third_party_iabs : false,
+					third_party_optins : false,
+					third_party_optouts : false,
+					customer_iabs : false,
+					customer_optins : false,
+					customer_optouts : false,
+					piggybacks : false,
+					advertiser_decision : null,
+					user_decision : null,
+					user_decision_target : null,
+					piggyback_opts : null
+				},
+				getDistinctionOfCases : function() {
+					var call_source = this.parent.params.get("kp_call_source");
+					if(call_source==null) {
+						if(this.parent.params.get("kp_user_opt")!=null || this.parent.params.get("kp_customer_opt")!=null || this.parent.params.get("kp_combined_opt")!=null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_params_default!="undefined") {
+								call_source = conf['global'].call_source_params_default;
+							}
+						}
+						if(call_source==null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_default!="undefined") {
+								call_source = conf['global'].call_source_default;
+							}
+						}
+					}
+					
+					if(call_source=="cm" || this.parent.params.hasIabParams()) {
+						var customer_id = this.parent.params.get("kp_customer_id");
+						if(customer_id===null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_advertiser_global_key!="undefined") {
+								customer_id = conf['global'].cookie_advertiser_global_key;
+							} else
+							customer_id = "global_opt";
+						}
+						
+						var iab_decision = this.parent.params.get("kp_iab_opt");
+						
+						if(iab_decision===true) {
+							this.data.third_party_iabs = true;
+							this.data.customer_iabs = true;
+						}
+						
+						var advertiser_decision_explicit = true;
+						var advertiser_decision = this.parent.params.get("kp_customer_opt");
+						if(advertiser_decision==null) {
+							advertiser_decision = this.parent.params.get("kp_combined_opt");
+							if(advertiser_decision==null) {
+								advertiser_decision_explicit = false;
+								if(typeof conf['customers']!="undefined") {
+									if(typeof conf['customers'][customer_id]!="undefined" && typeof conf['customers'][customer_id].advertiser_decision_default!="undefined") {
+										advertiser_decision = conf['customers'][customer_id].advertiser_decision_default;
+									} else
+									if(typeof conf['customers']['default']!="undefined" && typeof conf['customers']['default'].advertiser_decision_default!="undefined") {
+										advertiser_decision = conf['customers']['default'].advertiser_decision_default;
+									}
+								}
+							}
+						}
+						
+						var user_decision_explicit = true;
+						var user_decision = this.parent.params.get("kp_user_opt");
+						if(user_decision==null) {
+							user_decision = this.parent.params.get("kp_combined_opt");
+							if(user_decision==null) {
+								user_decision_explicit = false;
+								if(typeof conf['customers']!="undefined") {
+									if(typeof conf['customers'][customer_id]!="undefined" && typeof conf['customers'][customer_id].user_decision_default!="undefined") {
+										user_decision = conf['customers'][customer_id].user_decision_default;
+									} else
+									if(typeof conf['customers']['default']!="undefined" && typeof conf['customers']['default'].user_decision_default!="undefined") {
+										user_decision = conf['customers']['default'].user_decision_default;
+									}
+								}
+							}
+						}
+						var user_decision_numeric = false;
+						if(this.isNumeric(user_decision)) {
+							user_decision_numeric = true;
+							user_decision = parseInt(user_decision);
+							if(user_decision==1) {
+								user_decision = advertiser_decision;
+							} else
+							if(user_decision==0) {
+								user_decision = null;
+							}
+						}
+						
+						var user_decision_target = 'advertiser';
+						if(this.parent.params.get("kp_pixel_id")!=null) {
+							user_decision_target = 'pixel';
+						}
+						
+						this.data.advertiser_decision = advertiser_decision;
+						this.data.user_decision = user_decision;
+						this.data.user_decision_target = user_decision_target;
+						
+						if(!user_decision_numeric && user_decision_explicit && !advertiser_decision_explicit) {
+							advertiser_decision = null;
+						}
+						
+						if(user_decision!=null || advertiser_decision!=null) {
+							this.data.documentation = true;
+							if(advertiser_decision=="out" && user_decision=="out") {
+								this.data.third_party_optouts = true;
+							} else
+							if(advertiser_decision=="in" && user_decision=="in") {
+								this.data.third_party_optins = true;
+							}
+						}
+						
+						switch(advertiser_decision+":"+user_decision) {
+							case "in:in":
+							case "null:in":
+							case "null:exp_in":
+								this.data.documentation_type = 1;
+								if(user_decision_target=='advertiser') {
+									if(!this.parent.params.hasIabParams()) {
+										this.data.third_party_optins = true;
+										this.data.customer_optins = true;
+									}
+								}
+								break;
+							case "in:null":
+							case "in:out":
+								this.data.documentation_type = 3;
+								break;
+							case "out:out":
+							case "null:out":
+							case "null:exp_out":
+								this.data.documentation_type = 2;
+								if(user_decision_target=='advertiser') {
+									if(!this.parent.params.hasIabParams()) {
+										this.data.third_party_optouts = true;
+										this.data.customer_optouts = true;
+									}
+								}
+								break;
+							case "out:null":
+							case "out:in":
+								this.data.documentation_type = 4;
+								break;
+						}
+					} 
+					if(call_source=="mt") {
+						var customer_id = this.parent.params.get("kp_customer_id");
+						
+						var advertiser_decision = this.parent.params.get("kp_customer_opt");
+						if(advertiser_decision==null) {
+							advertiser_decision = this.parent.params.get("kp_combined_opt");
+							if(advertiser_decision==null) {
+								advertiser_decision = this.parent.cookie.get(this.getAdvertiserCookieKey(), "advertiser_decision");
+								var advertiser_decision_conf = null;
+								if(typeof conf['customers']!="undefined") {
+									if(typeof conf['customers'][customer_id]!="undefined" && typeof conf['customers'][customer_id].advertiser_decision_default!="undefined") {
+										advertiser_decision_conf = conf['customers'][customer_id].advertiser_decision_default;
+									} else
+									if(typeof conf['customers']['default']!="undefined" && typeof conf['customers']['default'].advertiser_decision_default!="undefined") {
+										advertiser_decision_conf = conf['customers']['default'].advertiser_decision_default;
+									}
+								}
+								if(advertiser_decision==null || advertiser_decision!=advertiser_decision_conf) {
+									if(advertiser_decision!=null && advertiser_decision!=advertiser_decision_conf) {
+										var user_decision_tmp = this.parent.cookie.get(this.getAdvertiserCookieKey(), "user_decision");
+										if(typeof user_decision_tmp!="undefined") {
+											if(user_decision_tmp.indexOf("imp_")!=-1) {
+												this.parent.cookie.unset(this.getAdvertiserCookieKey());
+											} else
+											if(user_decision_tmp.indexOf("exp_")!=-1) {
+												var user_cookie_tmp = this.parent.cookie.get(this.getAdvertiserCookieKey());
+												user_cookie_tmp.advertiser_decision = advertiser_decision_conf;
+												this.parent.cookie.set(this.getAdvertiserCookieKey(), user_cookie_tmp);
+											}
+										}
+									}
+								
+									advertiser_decision = advertiser_decision_conf;
+								}
+							}
+						}
+						
+						var has_cookie_data_user = false;
+						var user_decision = this.parent.params.get("kp_user_opt");
+						if(user_decision==null) {
+							user_decision = this.parent.params.get("kp_combined_opt");
+							if(user_decision==null) {
+								user_decision = this.parent.cookie.get(this.getAdvertiserCookieKey(), "user_decision");
+								user_decision_timestamp = this.parent.cookie.get(this.getAdvertiserCookieKey(), "timestamp");
+								user_decision_global = this.parent.cookie.get("global_opt", "user_decision");
+								user_decision_global_timestamp = this.parent.cookie.get("global_opt", "timestamp");
+								
+								has_cookie_data_user = !!(typeof user_decision!="undefined");
+								
+								if(typeof user_decision!="undefined" && typeof user_decision_global!="undefined") {
+									if(user_decision_global_timestamp>user_decision_timestamp) {
+										user_decision = user_decision_global;
+									}
+								}
+								if(typeof user_decision_global!="undefined" && (typeof user_decision=="undefined" || user_decision.indexOf("exp_")==-1)) {
+									user_decision = user_decision_global;
+								}
+								if(user_decision==null) {
+									if(typeof conf['customers']!="undefined") {
+										if(typeof conf['customers'][customer_id]!="undefined" && typeof conf['customers'][customer_id].user_decision_default!="undefined") {
+											user_decision = conf['customers'][customer_id].user_decision_default;
+										} else
+										if(typeof conf['customers']['default']!="undefined" && typeof conf['customers']['default'].user_decision_default!="undefined") {
+											user_decision = conf['customers']['default'].user_decision_default;
+										}
+									}
+								}
+							}
+						}
+						
+						this.data.advertiser_decision = advertiser_decision;
+						this.data.user_decision = user_decision;
+						this.data.user_decision_target = 'advertiser';
+						
+						switch(advertiser_decision+":"+user_decision) {
+							case "in:in":
+							case "in:exp_in":
+							case "out:exp_in":
+								this.data.piggybacks = true;
+								if(has_cookie_data_user) {
+									var pixel = this.parent.cookie.get(this.getAdvertiserCookieKey(), "pixel");
+									if(typeof pixel!="undefined") {
+										var piggyback_opts = [];
+										for(var i in pixel) {
+											if(!pixel.hasOwnProperty(i)) continue;
+											if(pixel[i].user_decision=='exp_out') {
+												piggyback_opts.push(i);
+											}
+										}
+										this.data.piggyback_opts = piggyback_opts;
+									}
+								}
+								break;
+							case "in:out":
+							case "in:imp_out":
+							case "in:null":
+								if(!has_cookie_data_user) {
+									this.data.documentation_type = 3;
+									this.data.documentation = true;
+								}
+								break;
+							case "out:out":
+							case "out:exp_out":
+							case "in:exp_out":
+								break;
+							case "out:in":
+							case "out:imp_in":
+							case "out:null":
+								if(!has_cookie_data_user) {
+									this.data.documentation_type = 4;
+									this.data.documentation = true;
+								} else {
+									var pixel = this.parent.cookie.get(this.getAdvertiserCookieKey(), "pixel");
+									if(typeof pixel!="undefined") {
+										var piggyback_opts = [];
+										for(var i in pixel) {
+											if(!pixel.hasOwnProperty(i)) continue;
+											if(pixel[i].user_decision=='exp_out') {
+												piggyback_opts.push(i);
+											}
+										}
+										this.data.piggyback_opts = piggyback_opts;
+									}
+								}
+								this.data.piggybacks = true;
+								break;
+						}
+					}
+				},
+				isNumeric : function(n) {
+					return !isNaN(parseFloat(n)) && isFinite(n);
+				},
+				get : function(key) {
+					return this.data[key];
+				},
+				hasAdvertiserSpecificDistinction : function() {
+					var cookie_advertiser_specific = false;
+					if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_advertiser_specific!="undefined" && conf['global'].cookie_advertiser_specific) {
+						cookie_advertiser_specific = conf['global'].cookie_advertiser_specific;
+					}
+					return cookie_advertiser_specific;
+				},
+				getAdvertiserCookieKey : function() {
+					var cookie_advertiser_key = "opt_global";
+					if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_advertiser_specific!="undefined" && conf['global'].cookie_advertiser_specific) {
+						cookie_advertiser_key = this.parent.params.get("kp_customer_id");
+						if(cookie_advertiser_key===null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_advertiser_global_key!="undefined") {
+								cookie_advertiser_key = conf['global'].cookie_advertiser_global_key;
+							} else
+							cookie_advertiser_key = "global_opt";
+						}
+					} else
+					if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_advertiser_unspecific_key!="undefined") {
+						cookie_advertiser_key = conf['global'].cookie_advertiser_unspecific_key;
+					}
+					return cookie_advertiser_key;
+				},
+				init : function() {
+					this.getDistinctionOfCases();
+				}
+			},
+			documentation : {
+				parent : null,
+				init : function() {
+					if(this.parent.distinction.get("documentation")!==true) return;
+					
+					var conf = JSON.parse(JSON.stringify(this.parent.conf));
+					
+					var customer_id = this.parent.params.get("kp_customer_id");
+					
+					var pixel_id = this.parent.params.get("kp_pixel_id");
+					
+					var cookie_data_user = this.parent.cookie.get(this.parent.distinction.getAdvertiserCookieKey());
+					var cookie_data_user_global = this.parent.cookie.get("global_opt");
+					var cookie_data;
+					if(typeof cookie_data_user!="undefined" && typeof cookie_data_user_global!="undefined") {
+						if(cookie_data_user_global.timestamp>cookie_data_user.timestamp) {
+							cookie_data = cookie_data_user_global;
+						} else {
+							cookie_data = cookie_data_user;
+						}
+					} else
+					if(typeof cookie_data_user!="undefined") {
+						cookie_data = cookie_data_user;
+					} else
+					if(typeof cookie_data_user_global!="undefined") {
+						cookie_data = cookie_data_user_global;
+					}
+					
+					var has_cookie = !!cookie_data;
+					var has_cookie_date = !!(cookie_data && cookie_data.timestamp);
+					
+					var target = this.parent.distinction.get("user_decision_target");
+					
+					if(target=='advertiser' || !has_cookie) {
+						if(has_cookie) {
+							conf = JSON.parse(JSON.stringify(cookie_data));
+						}
+						conf.customer_id = this.parent.params.get("kp_customer_id");
+						conf.referrer = this.getRef();
+						conf.user_decision = this.parent.distinction.get("user_decision");
+						conf.advertiser_decision = this.parent.distinction.get("advertiser_decision");
+						
+						if(this.isNumeric(conf.user_decision)) {
+							conf.user_decision = parseInt(conf.user_decision);
+							if(conf.user_decision==1) {
+								conf.user_decision = conf.advertiser_decision;
+							} else
+							if(conf.user_decision==0) {
+								conf.user_decision = null;
+							}
+						}
+						
+						if(cookie_data && cookie_data.customer_id && cookie_data.customer_id!=conf.customer_id) {
+							has_cookie_date = false;
+						}
+					}
+					if(target=='pixel') {
+						if(has_cookie) {
+							conf = JSON.parse(JSON.stringify(cookie_data));
+						}
+						if(typeof conf['pixel']=="undefined") conf['pixel']={};
+					}
+					
+					var extend_decision = true;
+					
+					var ts = this.getTimestamp();
+					switch(this.parent.distinction.get("documentation_type")) {
+						case 1:
+							if(target=='advertiser') {
+								conf.timestamp = ts;
+								if(extend_decision && conf.user_decision.indexOf("exp_")==-1) conf.user_decision = "exp_" + conf.user_decision;
+							} else
+							if(target=='pixel') {
+								if(!has_cookie) {
+									conf.timestamp = ts;
+									conf.user_decision = "imp_out";
+								}
+								var pixel_conf = {};
+								pixel_conf.timestamp = ts;
+								pixel_conf.referrer = this.getRef();
+								pixel_conf.user_decision = this.parent.distinction.get("user_decision");
+								if(extend_decision) pixel_conf.user_decision = "exp_" + pixel_conf.user_decision;
+								if(typeof conf['pixel']=="undefined") conf['pixel']={};
+								conf['pixel'][pixel_id] = pixel_conf;
+							}
+							break;
+						case 2:
+							if(target=='advertiser') {
+								conf.timestamp = ts;
+								if(extend_decision && conf.user_decision.indexOf("exp_")==-1) conf.user_decision = "exp_" + conf.user_decision;
+							} else
+							if(target=='pixel') {
+								if(!has_cookie) {
+									conf.timestamp = ts;
+									conf.user_decision = "imp_in";
+								}
+								var pixel_conf = {};
+								pixel_conf.timestamp = ts;
+								pixel_conf.referrer = this.getRef();
+								pixel_conf.user_decision = this.parent.distinction.get("user_decision");
+								if(extend_decision) pixel_conf.user_decision = "exp_" + pixel_conf.user_decision;
+								if(typeof conf['pixel']=="undefined") conf['pixel']={};
+								conf['pixel'][pixel_id] = pixel_conf;
+							}
+							break;
+						case 3:
+							if(target=='advertiser') {
+								conf.timestamp = (has_cookie_date) ? cookie_data.timestamp : ts;
+								conf.user_decision = "out";
+								if(extend_decision && conf.user_decision.indexOf("imp_")==-1) conf.user_decision = "imp_" + conf.user_decision;
+							}
+							break;
+						case 4:
+							if(target=='advertiser') {
+								conf.timestamp = (has_cookie_date) ? cookie_data.timestamp : ts;
+								conf.user_decision = "in";
+								if(extend_decision && conf.user_decision.indexOf("imp_")==-1) conf.user_decision = "imp_" + conf.user_decision;
+							}
+							break;
+					}
+					
+					this.parent.cookie.set(this.parent.distinction.getAdvertiserCookieKey(), conf);
+					
+					var parent_conf = this.parent.getConf();
+					if(typeof parent_conf['global']!="undefined" && typeof parent_conf['global'].cookie_log_gdpr_params!="undefined" && parent_conf['global'].cookie_log_gdpr_params) {
+						if(this.parent.params.hasIabParams()) {
+							var iab_params = this.parent.params.getIabParams();
+							this.parent.cookie.set(this.parent.distinction.getAdvertiserCookieKey() + "_gdpr", iab_params);
+						}
+					}
+				},
+				getRef : function() {
+					var ref = "-";
+					if(d.referrer) {
+						ref = d.referrer;
+					} else
+					if(this.parent.params.get("kp_ref")) {
+						ref = this.parent.params.get("kp_ref");
+					}
+					
+					return ref;
+				},
+				getTimestamp : function() {
+					if(!Date.now) {
+					    Date.now = function() { return new Date().getTime(); }
+					}
+					
+					return Math.floor(Date.now() / 1000);
+				},
+				isNumeric : function(n) {
+					return !isNaN(parseFloat(n)) && isFinite(n);
+				}
+			},
+			pixel : {
+				parent : null,
+				init : function() {},
+				load : function(type, url, content, id) {
+					if(type == 'image') {
+						content = '<img src="' + url + '" width="1" height="1" />';
+						url = null;
+					} else
+					if(type == 'script') {
+						if(content){
+						} else {
+							content = '<sc' + 'ript src="' + url + '"></sc' + 'ript>';
+							url = null;
+						}
+					} else
+					if(type == 'url') {
+						content = null;
+					}
+
+					w.setTimeout(function() {w.KPMasterTagConsent.pixel.loadAsyncIframe(content, url, id);});
+				},
+				loadAsyncIframe : function(content, url, id, timeout) {
+					var iframe = document.createElement('iframe');
+					iframe.id = 'kp' + id;
+					iframe.allowtransparency = 'true';
+					iframe.framespacing = '0';
+					iframe.frameborder = '0';
+					iframe.scrolling = 'no';
+					iframe.width = '0';
+					iframe.height = '0';
+					
+					if(url) {
+						iframe.src = url;
+					} else {
+						if('srcdoc' in iframe) {
+							iframe.srcdoc = content;
+						} else {
+							content = content.replace(/"/g, '\\"');
+							var u = 'javascript:(function(){document.open();document.domain="' + document.domain + '";document.write("' + content + '");document.close();})();';
+							iframe.src = u;
+						}
+					}
+					
+					if(!document.body){
+						document.firstChild.appendChild(document.createElement('body'));
+					}
+					
+					if(document.getElementById('kpdiv' + id)===null) {
+						var hiddenDiv = document.createElement('div');
+						hiddenDiv.id = 'kpdiv' + id;
+						hiddenDiv.innerHTML = '';
+						hiddenDiv.style.visibility = 'hidden';
+						hiddenDiv.style.display = 'none';
+						
+						document.body.appendChild(hiddenDiv);
+					}
+					document.getElementById('kpdiv' + id).appendChild(iframe);
+				}
+			},
+			thirdParty : {
+				parent : null,
+				data : {
+					loaded : []
+				},
+				defaults : {
+					parameter_assignment_operator : '=',
+					parameter_delimiter : '&',
+					regexp_parameter_assignment_operator_placeholder : '\\[=\\]',
+					regexp_parameter_delimiter_placeholder : '\\[&\\]',
+					regexp_iab_consent_placeholder : '\\[IAB_CONSENT\\]',
+					regexp_customer_id_placeholder : '\\[CUSTOMER_ID\\]'
+				},
+				init : function() {
+					var call_source = this.parent.params.get("kp_call_source");
+					if(call_source==null) {
+						if(this.parent.params.get("kp_user_opt")!=null || this.parent.params.get("kp_customer_opt")!=null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_params_default!="undefined") {
+								call_source = conf['global'].call_source_params_default;
+							}
+						}
+						if(call_source==null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_default!="undefined") {
+								call_source = conf['global'].call_source_default;
+							}
+						}
+					}
+					if(call_source!=="cm") return;
+					
+					var target = this.parent.distinction.get("user_decision_target");
+					if(target!=="advertiser") return;
+					
+					if(this.parent.distinction.get("third_party_optins")!==true && this.parent.distinction.get("third_party_optouts")!==true) return;
+					
+					this.load();
+				},
+				load : function() {
+					if(this.parent.distinction.get("third_party_iabs")===true) this.loadIABs();
+					if(this.parent.distinction.get("third_party_optins")===true) this.loadOptIns();
+					if(this.parent.distinction.get("third_party_optouts")===true) this.loadOptOuts();
+				},
+				loadOptIns : function() {
+					if(typeof conf['thirdParty']!="undefined" && typeof conf['thirdParty']['optin']!="undefined" && conf['thirdParty']['optin'].length>0) {
+						this.parent.pixel.init();
+						var prefix = 'tpoi';
+						for(var oiId in conf['thirdParty']['optin']) {
+							var oi = conf['thirdParty']['optin'][oiId];
+							
+							if(typeof oi == 'function') continue;
+							
+							if(typeof oi.id == "undefined" || oi.id=='' || this.data.loaded.indexOf(oi.id)==-1) {
+								this.parent.pixel.load(oi.type, oi.url, oi.content, prefix+(oi.name||oiId));
+								
+								if(typeof oi.id != "undefined" && oi.id!='') {
+									this.data.loaded.push(oi.id);
+								}
+							}
+						}
+					}
+				},
+				loadOptOuts : function() {
+					if(typeof conf['thirdParty']!="undefined" && typeof conf['thirdParty']['optout']!="undefined" && conf['thirdParty']['optout'].length>0) {
+						this.parent.pixel.init();
+						var prefix = 'tpoo';
+						for(var ooId in conf['thirdParty']['optout']) {
+							var oo = conf['thirdParty']['optout'][ooId];
+							
+							if(typeof oo == 'function') continue;
+							
+							if(typeof oo.id == "undefined" || oo.id=='' || this.data.loaded.indexOf(oo.id)==-1) {
+								this.parent.pixel.load(oo.type, oo.url, oo.content, prefix+(oo.name||ooId));
+								
+								if(typeof oo.id != "undefined" && oo.id!='') {
+									this.data.loaded.push(oo.id);
+								}
+							}
+						}
+					}
+				},
+				loadIABs : function() {
+					if(this.parent.params.hasIabParams()) {
+						if(typeof conf['thirdParty']!="undefined" && typeof conf['thirdParty']['iab']!="undefined" && conf['thirdParty']['iab'].length>0) {
+							var iab_params = this.parent.params.getIabParams();
+							var iab_query_params = [];
+							var iab_query = '';
+							var parameter_assignment_operator_placeholder = this.defaults.regexp_parameter_assignment_operator_placeholder.replace(/\\/g, '');
+							var parameter_delimiter_placeholder = this.defaults.regexp_parameter_delimiter_placeholder.replace(/\\/g, '');
+							for(var i in iab_params) {
+								iab_query_params.push(i+parameter_assignment_operator_placeholder+iab_params[i]);
+							}
+							iab_query = iab_query_params.join(parameter_delimiter_placeholder);
+							
+							var customer_id = this.parent.params.get('kp_customer_id') || '';
+							
+							var iab_reg = new RegExp(this.defaults.regexp_iab_consent_placeholder, "g");
+							var cust_reg = new RegExp(this.defaults.regexp_customer_id_placeholder, "g");
+							
+							var eq_reg = new RegExp(this.defaults.regexp_parameter_assignment_operator_placeholder, "g");
+							var amp_reg = new RegExp(this.defaults.regexp_parameter_delimiter_placeholder, "g");
+							
+							this.parent.pixel.init();
+							var prefix = 'tpiab';
+							
+							for(var iabId in conf['thirdParty']['iab']) {
+								var iab = conf['thirdParty']['iab'][iabId];
+								
+								if(typeof iab == 'function') continue;
+								
+								var tp_iab_query = iab_query;
+								tp_iab_query = tp_iab_query.replace(eq_reg, iab.parameter_assignment_operator || this.defaults.parameter_assignment_operator);
+								tp_iab_query = tp_iab_query.replace(amp_reg, iab.parameter_delimiter || this.defaults.parameter_delimiter);
+								
+								if(typeof iab.id == "undefined" || iab.id=='' || this.data.loaded.indexOf(iab.id)==-1) {
+									var iab_url = iab.url;
+									if(iab_url!='') {
+										iab_url = iab_url.replace(iab_reg, tp_iab_query);
+										iab_url = iab_url.replace(cust_reg, customer_id);
+									}
+									
+									var iab_content = iab.content;
+									if(iab_content!='') {
+										iab_content = iab_content.replace(iab_reg, tp_iab_query);
+										iab_content = iab_content.replace(cust_reg, customer_id);
+									}
+									
+									this.parent.pixel.load(iab.type, iab_url, iab_content, prefix+(iab.name||iabId));
+									
+									if(typeof iab.id != "undefined" && iab.id!='') {
+										this.data.loaded.push(iab.id);
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			additionals : {
+				parent : null,
+				init : function() {
+					var call_source = this.parent.params.get("kp_call_source");
+					if(call_source==null) {
+						if(this.parent.params.get("kp_user_opt")!=null || this.parent.params.get("kp_customer_opt")!=null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_params_default!="undefined") {
+								call_source = conf['global'].call_source_params_default;
+							}
+						}
+						if(call_source==null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_default!="undefined") {
+								call_source = conf['global'].call_source_default;
+							}
+						}
+					}
+					if(call_source!=="cm") return;
+					
+					var target = this.parent.distinction.get("user_decision_target");
+					if(target!=="advertiser") return;
+					
+					var sub_class_config = {};
+					if(typeof conf['additionals']!="undefined" && typeof conf['additionals']['customers']!="undefined") {
+						sub_class_config = conf['additionals']['customers'];
+					}
+					this.parent.customers.init(sub_class_config);
+				}
+			},
+			customers : {
+				parent : null,
+				data : {
+					loaded : []
+				},
+				defaults : {
+					parameter_assignment_operator : '=',
+					parameter_delimiter : '&',
+					regexp_parameter_assignment_operator_placeholder : '\\[=\\]',
+					regexp_parameter_delimiter_placeholder : '\\[&\\]',
+					regexp_iab_consent_placeholder : '\\[IAB_CONSENT\\]',
+					regexp_customer_id_placeholder : '\\[CUSTOMER_ID\\]'
+				},
+				init_conf : null,
+				conf : null,
+				state : 0,
+				interval : null,
+				interval_counter : 0,
+				init : function(init_conf) {
+					this.init_conf = init_conf;
+					var call_source = this.parent.params.get("kp_call_source");
+					if(call_source==null) {
+						if(this.parent.params.get("kp_user_opt")!=null || this.parent.params.get("kp_customer_opt")!=null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_params_default!="undefined") {
+								call_source = conf['global'].call_source_params_default;
+							}
+						}
+						if(call_source==null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_default!="undefined") {
+								call_source = conf['global'].call_source_default;
+							}
+						}
+					}
+					if(call_source!=="cm") return;
+					
+					var target = this.parent.distinction.get("user_decision_target");
+					if(target!=="advertiser") return;
+					
+					this.load();
+				},
+				load : function() {
+					if(this.state===0) {
+						this.loadConfig();
+					} else 
+					if(this.state===1) {
+						this.isConfigLoaded();
+					} else
+					if(this.state===2) {
+						if(this.parent.distinction.get("customer_iabs")===true) this.loadIABs();
+						if(this.parent.distinction.get("customer_optins")===true) this.loadOptIns();
+						if(this.parent.distinction.get("customer_optouts")===true) this.loadOptOuts();
+					} else
+					if(this.state===3) {
+					}
+				},
+				loadConfig : function() {
+					this.state = 1;
+					
+					var customer_id = this.parent.params.get("kp_customer_id");
+					if(customer_id!==null) {
+						if(typeof this.init_conf['config']!="undefined" && this.init_conf['config'].indexOf(customer_id)!=-1) {
+							var scr = document.createElement('script');
+							scr.async = true;
+							scr.src = 'customers/'+customer_id+'.js';
+							var elem = document.getElementsByTagName('script')[0];
+							elem.parentNode.insertBefore(scr, elem);
+							
+							this.interval = w.setInterval(function() { w.KPMasterTagConsent.customers.load(); }, 100);
+						}
+					}
+				},
+				isConfigLoaded : function() {
+					this.interval_counter++;
+					
+					if(this.conf!==null || this.interval_counter>=10) {
+						this.state = (this.conf!==null) ? 2 : 3;
+						
+						w.clearInterval(this.interval);
+						this.load();
+					}
+				},
+				loadOptIns : function() {
+					if(typeof this.conf['optin']!="undefined" && this.conf['optin'].length>0) {
+						this.parent.pixel.init();
+						var prefix = 'cuoi';
+						for(var oiId in this.conf['optin']) {
+							var oi = this.conf['optin'][oiId];
+							
+							if(typeof oi == 'function') continue;
+							
+							if(typeof oi.id == "undefined" || oi.id=='' || this.data.loaded.indexOf(oi.id)==-1) {
+								this.parent.pixel.load(oi.type, oi.url, oi.content, prefix+(oi.name||oiId));
+							
+								if(typeof oi.id != "undefined" && oi.id!='') {
+									this.data.loaded.push(oi.id);
+								}
+							}
+						}
+					}
+				},
+				loadOptOuts : function() {
+					if(typeof this.conf['optout']!="undefined" && this.conf['optout'].length>0) {
+						this.parent.pixel.init();
+						var prefix = 'cuoo';
+						for(var ooId in this.conf['optout']) {
+							var oo = this.conf['optout'][ooId];
+							
+							if(typeof oo == 'function') continue;
+							
+							if(typeof oo.id == "undefined" || oo.id=='' || this.data.loaded.indexOf(oo.id)==-1) {
+								this.parent.pixel.load(oo.type, oo.url, oo.content, prefix+(oo.name||ooId));
+								
+								if(typeof oo.id != "undefined" && oo.id!='') {
+									this.data.loaded.push(oo.id);
+								}
+							}
+						}
+					}
+				},
+				loadIABs : function() {
+					if(this.parent.params.hasIabParams()) {
+						if(typeof this.conf['iab']!="undefined" && this.conf['iab'].length>0) {
+							var iab_params = this.parent.params.getIabParams();
+							var iab_query_params = [];
+							var iab_query = '';
+							var parameter_assignment_operator_placeholder = this.defaults.regexp_parameter_assignment_operator_placeholder.replace(/\\/g, '');
+							var parameter_delimiter_placeholder = this.defaults.regexp_parameter_delimiter_placeholder.replace(/\\/g, '');
+							for(var i in iab_params) {
+								iab_query_params.push(i+parameter_assignment_operator_placeholder+iab_params[i]);
+							}
+							iab_query = iab_query_params.join(parameter_delimiter_placeholder);
+							
+							var customer_id = this.parent.params.get('kp_customer_id');
+							
+							var iab_reg = new RegExp(this.defaults.regexp_iab_consent_placeholder, "g");
+							var cust_reg = new RegExp(this.defaults.regexp_customer_id_placeholder, "g");
+							
+							var eq_reg = new RegExp(this.defaults.regexp_parameter_assignment_operator_placeholder, "g");
+							var amp_reg = new RegExp(this.defaults.regexp_parameter_delimiter_placeholder, "g");
+							
+							this.parent.pixel.init();
+							var prefix = 'cuiab';
+							
+							for(var iabId in this.conf['iab']) {
+								var iab = this.conf['iab'][iabId];
+								
+								if(typeof iab == 'function') continue;
+								
+								var customer_iab_query = iab_query;
+								customer_iab_query = customer_iab_query.replace(eq_reg, iab.parameter_assignment_operator || this.defaults.parameter_assignment_operator);
+								customer_iab_query = customer_iab_query.replace(amp_reg, iab.parameter_delimiter || this.defaults.parameter_delimiter);
+								
+								if(typeof iab.id == "undefined" || iab.id=='' || this.data.loaded.indexOf(iab.id)==-1) {
+									var iab_url = iab.url;
+									if(iab_url!='') {
+										iab_url = iab_url.replace(iab_reg, customer_iab_query);
+										iab_url = iab_url.replace(cust_reg, customer_id);
+									}
+									
+									var iab_content = iab.content;
+									if(iab_content!='') {
+										iab_content = iab_content.replace(iab_reg, customer_iab_query);
+										iab_content = iab_content.replace(cust_reg, customer_id);
+									}
+									
+									this.parent.pixel.load(iab.type, iab_url, iab_content, prefix+(iab.name||iabId));
+									
+									if(typeof iab.id != "undefined" && iab.id!='') {
+										this.data.loaded.push(iab.id);
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			consent : {
+				parent : null,
+				consent_delimiter : '|#|',
+				consent_data_chunk_length : 12,
+				consent_data_delimiter : '-',
+				consent_data_length_limit : 2047,
+				data : [],
+				init : function() {
+					if(!this.isActive()) return;
+					
+					this.getCookieData();
+					this.formatData();
+				},
+				isActive : function() {
+					if(typeof conf['global']!="undefined" && typeof conf['global'].module_consent_active!="undefined") {
+						return conf['global'].module_consent_active;
+					}
+					return false;
+				},
+				getCookieData : function() {
+					var all_keys = this.parent.cookie.get("opt_keys");
+					if(all_keys) {
+						for(var key in all_keys) {
+							if(!all_keys.hasOwnProperty(key)) continue;
+							
+							var cookie_key = all_keys[key];
+							if(cookie_key!="opt_keys" && cookie_key!="opt_global") {
+								var customer_cookie = this.parent.cookie.get(cookie_key);
+								if(customer_cookie) {
+									this.data.push(customer_cookie);
+								}
+							}
+						}
+					}
+				},
+				formatData : function() {
+					for(var key in this.data) {
+						if(!this.data.hasOwnProperty(key)) continue;
+						
+						var customer_cookie = this.data[key];
+						var personal_data = [];
+						
+						personal_data.push( customer_cookie.customer_id );
+						personal_data.push( customer_cookie.user_decision );
+						personal_data.push( customer_cookie.timestamp );
+						personal_data.push( customer_cookie.referrer || '-' );
+						personal_data.push( '-' );
+						personal_data = personal_data.join("|");
+						
+						this.data[key] = personal_data;
+					}
+				},
+				getData : function() {
+					return this.data;
+				},
+				getDataString : function(encode_data, split_data) {
+					if(typeof encode_data=="undefined") encode_data=false;
+					if(typeof split_data=="undefined") split_data=false;
+					
+					var data_string = this.data.join(this.consent_delimiter);
+					if(encode_data) {
+						data_string = window.btoa(data_string);
+					}
+					if(encode_data && split_data) {
+						var splitRegEx = new RegExp(".{1,"+this.consent_data_chunk_length+"}", "g");
+						data_string = data_string.match(splitRegEx).join(this.consent_data_delimiter);
+					}
+					if(data_string.length>=this.consent_data_length_limit) {
+						data_string = '-';
+						if(encode_data) {
+							data_string = window.btoa(data_string);
+						}
+						if(encode_data && split_data) {
+							var splitRegEx = new RegExp(".{1,"+this.consent_data_chunk_length+"}", "g");
+							data_string = data_string.match(splitRegEx).join(this.consent_data_delimiter);
+						}
+					}
+					
+					return data_string;
+				}
+			},
+			piggybacks : {
+				parent : null,
+				init : function() {
+					var call_source = this.parent.params.get("kp_call_source");
+					if(call_source==null) {
+						if(this.parent.params.get("kp_user_opt")!=null || this.parent.params.get("kp_customer_opt")!=null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_params_default!="undefined") {
+								call_source = conf['global'].call_source_params_default;
+							}
+						}
+						if(call_source==null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_default!="undefined") {
+								call_source = conf['global'].call_source_default;
+							}
+						}
+					}
+					if(call_source!=="mt") return;
+					
+					if(this.parent.distinction.get("piggybacks")===true) {
+						this.setToBeLoaded();
+					} else {
+						this.setToBeSkipped();
+					}
+				},
+				setToBeLoaded : function() {
+					this.parent.comm.init();
+					this.parent.comm.set("kp_opt_approval", true);
+					this.parent.comm.set("kp_opt_piggyback_opts", this.parent.distinction.get("piggyback_opts"));
+					this.parent.comm.set("kp_opt_allowed_vendor_partners", ["all"]);
+					if(typeof conf['global']!="undefined" && typeof conf['global'].cookie_log_gdpr_params!="undefined" && conf['global'].cookie_log_gdpr_params) {
+						var gdpr_cookie_data = this.parent.cookie.get(this.parent.distinction.getAdvertiserCookieKey() + "_gdpr");
+						if(typeof gdpr_cookie_data!=="undefined") {
+							if(Object.keys(gdpr_cookie_data).length) {
+								this.parent.comm.set("kp_gdpr_params",  true);
+								if(typeof gdpr_cookie_data.gdpr!=="undefined") this.parent.comm.set("kp_gdpr", gdpr_cookie_data.gdpr);
+								if(typeof gdpr_cookie_data.gdpr_consent!=="undefined") this.parent.comm.set("kp_gdpr_consent", gdpr_cookie_data.gdpr_consent);
+							}
+						}
+					}
+					if(this.parent.consent.isActive()) this.parent.comm.set("kp_opt_consent_data", this.parent.consent.getDataString(true, true));
+					this.parent.comm.sendToMastertag();
+				},
+				setToBeSkipped : function() {
+					this.parent.comm.init();
+					this.parent.comm.set("kp_opt_approval", false);
+					if(this.parent.consent.isActive()) this.parent.comm.set("kp_opt_consent_data", this.parent.consent.getDataString(true, true));
+					this.parent.comm.sendToMastertag();
+				}
+			},
+			respond : {
+				parent : null,
+				init : function() {
+					var call_source = this.parent.params.get("kp_call_source");
+					if(call_source==null) {
+						if(this.parent.params.get("kp_user_opt")!=null || this.parent.params.get("kp_customer_opt")!=null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_params_default!="undefined") {
+								call_source = conf['global'].call_source_params_default;
+							}
+						}
+						if(call_source==null) {
+							if(typeof conf['global']!="undefined" && typeof conf['global'].call_source_default!="undefined") {
+								call_source = conf['global'].call_source_default;
+							}
+						}
+					}
+					if(call_source!=="cm") return;
+					
+					var user_decision = this.parent.distinction.get("user_decision");
+					var advertiser_decision = this.parent.distinction.get("advertiser_decision");
+					
+					var opt_type_response = '';
+					switch(user_decision) {
+						case 'in':
+							opt_type_response = 'angemeldet';
+							break;
+						case 'out':
+							opt_type_response = 'abgemeldet';
+							break;
+					}
+					if(opt_type_response!='') {
+						var text_node = d.createTextNode("Sie wurden erfolgreich f\u00fcr den Dienst "+opt_type_response+"!");
+						d.body.appendChild(text_node);
+					}
+				}
+			},
+			action : {
+				parent : null,
+				init : function() {
+					this.parent.thirdParty.init();
+					this.parent.additionals.init();
+					this.parent.consent.init();
+					this.parent.piggybacks.init();
+					this.parent.respond.init();
+				}
+			},
+			comm : {
+				parent : null,
+				auth_check : true,
+				authenticated : false,
+				auth_token : Math.round((new Date()) / 1000) + "",
+				data : {},
+				set : function(key, val) {
+					this.data[key] = val;
+				},
+				get : function(key) {
+					return this.data[key];
+				},
+				sendToMastertag : function() {
+					this.sendMessage();
+				},
+				init : function() {
+					var message_method = this.onmessage.bind(this);
+			        window.attachEvent && window.attachEvent("onmessage", message_method);
+			        document.attachEvent && document.attachEvent("onmessage", message_method);
+			        window.addEventListener && window.addEventListener("message", message_method, !1);
+				},
+				onmessage : function(e) {
+					if(typeof e == "undefined") e = window.event;
+					
+					try {
+						if(e.data.indexOf("origin")!=-1) {
+							var data = JSON.parse(e.data);
+							
+							if(typeof data.auth != "undefined" && typeof data.authSource != "undefined") {
+								if(data.authSource == "KPConsentRemote" && data.auth == this.auth_token.split("").reverse().join("")) {
+									this.authenticated = true;
+									this.sendMessage(e);
+								}
+							}
+						}
+					} catch(e) {}
+				},
+				noAuth : function() {
+					this.auth_check = false;
+					return this;
+				},
+				sendAuthMessage : function() {
+					parent.postMessage('{"origin":"' + window.location.host + '","auth":"' + this.auth_token + '","authSource":"KPCRP"}', "*");
+				},
+				sendMessage : function(target) {
+			        if(this.auth_check && !this.authenticated) this.sendAuthMessage();
+			        else {
+			            var source;
+			            if(typeof target == "undefined") {
+			            	source = parent;
+			            	target = "*";
+			            } else {
+			            	source = target.source;
+			            	target = target.origin;
+			            }
+			            var d = this.hasParams() ? 'setParams,' : '',
+			                c = this.hasParams() ? ',"params":' + this.getParams() : '';
+			            source.postMessage('{"origin":"' + window.location.host + '","method":"' + d + '"' +
+			                c + ',"messageSource":"KPCRP","authCheck":' + this.auth_check + "}", target);
+			        }
+			    },
+			    hasParams : function() {
+			        return (Object.keys(this.data).length>0);
+			    },
+			    getParams : function(params) {
+			        return JSON.stringify(this.data);
+			    }
+			}
+		}
+	}
+	try {
+		w.KPMasterTagConsent.init(debug, async, conf);
+	} catch (c) {
+	}
+}(window));
+
+
+if(!Object.keys) {
+	Object.keys = function(obj) {
+		'use strict';
+		
+		var arr = [],
+			key;
+		for(key in obj) {
+			if(obj.hasOwnProperty(key)) {
+				arr.push(key);
+			}
+		}
+		return arr;
+	};
+}
+
+if(!window.btoa || !window.atob) {
+	var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
+	if(!window.btoa) {
+		window.btoa = function(string) {
+			return Base64.encode(string);
+		}
+	}
+	if(!window.atob) {
+		window.atob = function(string) {
+			return Base64.decode(string);
+		}
+	}
+}
+</script>
+
+</body></html>
